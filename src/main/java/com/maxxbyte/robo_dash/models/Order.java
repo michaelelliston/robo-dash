@@ -22,4 +22,13 @@ public class Order {
     public void add(OrderItem orderItem) {
         items.put(orderItem.getProductId(), orderItem);
     }
+
+    public double getTotal() {
+        double totalPrice = 0;
+        for (OrderItem orderItem : items.values()) {
+            Product p = orderItem.getProduct();
+            totalPrice += p.getPrice();
+        }
+        return totalPrice;
+    }
 }
