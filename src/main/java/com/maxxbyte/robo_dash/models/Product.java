@@ -1,6 +1,6 @@
 package com.maxxbyte.robo_dash.models;
 
-public abstract class Product {
+public class Product {
 
     String name;
     String description;
