@@ -5,6 +5,10 @@ import java.util.Map;
 
 public class Order {
 
+    User customer;
+    String deliveryLocation;
+    double totalPrice;
+
     Map<Integer, OrderItem> items = new HashMap<>();
 
     public Map<Integer, OrderItem> getItems() {
