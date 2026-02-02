@@ -3,6 +3,7 @@ package com.maxxbyte.robo_dash.models;
 public enum RobotStatus {
     IDLE(true),
     DELIVERING(false),
+    RETURNING(false),
     CHARGING(false),
     STUCK(false),
     CRASHED(false);
