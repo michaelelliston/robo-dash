@@ -6,10 +6,12 @@ public class Robot {
     int battery = 100;
     int walkwaySpeed = 15;
     int roadwaySpeed = 30;
-    boolean isOnDelivery;
+    RobotStatus isAvailable = RobotStatus.IDLE;
     boolean turnSignal = false;
-    Order currentOrder;
+    int currentOrderId;
 
+    public Robot() {
 
+    }
 
 }
