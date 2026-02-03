@@ -24,7 +24,13 @@ public class Robot {
         if (this.batteryLevel <= 40) {
             chargeBattery();
         }
+        //startDelivery(customerId);
     }
+
+    //public void startDelivery(int customerId) {
+        //status = RobotStatus.DELIVERING;
+        //currentRoute = mapRoute(getCustomerLocation(customerId), currentLocation);
+    //}
 
     public void chargeBattery() {
         if (batteryLevel < 100) {
@@ -40,12 +46,20 @@ public class Robot {
         turnSignal = !turnSignal;
     }
 
+    public Order getCurrentOrder() {
+        return this.currentOrder;
+    }
+
     public int getId() {
         return this.id;
     }
 
     public RobotStatus getStatus() {
         return status;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     // Parameters are assumed, use as necessary. TODO:
