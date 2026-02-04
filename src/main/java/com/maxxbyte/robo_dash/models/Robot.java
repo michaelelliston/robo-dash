@@ -5,8 +5,7 @@ public class Robot {
     //TODO: implement battery drain based on distance measurement
     private int id;
     private int batteryLevel = 100; // Percentage of battery
-    private final int walkwaySpeed = 15;
-    private final int roadwaySpeed = 30; //TODO: Consider using an enum for SurfaceType, and assign different speeds to those.
+    private SurfaceType speed = SurfaceType.WALKWAY;
     private RobotStatus status = RobotStatus.IDLE;
     private boolean turnSignal = false;
     private Order currentOrder;
@@ -30,6 +29,15 @@ public class Robot {
     //public void startDelivery(int customerId) {
         //status = RobotStatus.DELIVERING;
         //currentRoute = mapRoute(getCustomerLocation(customerId), currentLocation);
+    //}
+
+    //public SurfaceType checkSurfaceType(Location currentLocation) {
+        //if (currentLocation.getSurfaceType == SurfaceType.WALKWAY) {
+            //speed = SurfaceType.WALKWAY;
+        //} else if (currentLocation.getSurfaceType == SurfaceType.ROADWAY) {
+            //speed = SurfaceType.ROADWAY;
+        //} else {
+            // Possible Navigation error if not currently on roadway or walkway
     //}
 
     public void chargeBattery() {
