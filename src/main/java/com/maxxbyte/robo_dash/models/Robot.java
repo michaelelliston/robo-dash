@@ -2,7 +2,7 @@ package com.maxxbyte.robo_dash.models;
 
 public class Robot {
 
-    //TODO: implement battery drain based on distance measurement
+    //TODO: implement battery drain based on meters traveled
     private int id;
     private int batteryLevel = 100; // Percentage of battery
     private SurfaceType speed = SurfaceType.WALKWAY;

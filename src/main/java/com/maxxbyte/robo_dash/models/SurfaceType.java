@@ -1,16 +1,16 @@
 package com.maxxbyte.robo_dash.models;
 
 public enum SurfaceType {
-    WALKWAY(15),
-    ROADWAY(30);
+    WALKWAY(6.7),
+    ROADWAY(13.4);
 
-    private final int milesPerHour;
+    private final double metersPerSecond;
 
-    SurfaceType(int milesPerHour) {
-        this.milesPerHour = milesPerHour;
+    SurfaceType(double metersPerSecond) {
+        this.metersPerSecond = metersPerSecond;
     }
 
-    public int getMilesPerHour(){
-        return milesPerHour;
+    public double getMetersPerSecond(){
+        return metersPerSecond;
     }
 }
