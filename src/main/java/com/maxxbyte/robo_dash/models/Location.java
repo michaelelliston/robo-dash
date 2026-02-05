@@ -6,5 +6,5 @@ public class Location {
     String name;
     LocationType type;
     long latitude;
-    long longitute;
+    long longitude;
 }
