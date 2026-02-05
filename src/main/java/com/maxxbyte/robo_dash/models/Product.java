@@ -5,6 +5,7 @@ public class Product {
     String name;
     String description;
     String dietType;
+    String imageUrl;
     double price;
     int productId;
     int prepTime;
@@ -12,10 +13,11 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, String description, String dietType, double price, int itemId, int prepTime, int categoryId) {
+    public Product(String name, String description, String dietType, String imageUrl, double price, int itemId, int prepTime, int categoryId) {
         this.name = name;
         this.description = description;
         this.dietType = dietType;
+        this.imageUrl = imageUrl;
         this.price = price;
         this.productId = itemId;
         this.prepTime = prepTime;
@@ -32,6 +34,10 @@ public class Product {
 
     public String getDietType() {
         return dietType;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public double getPrice() {
@@ -60,6 +66,10 @@ public class Product {
 
     public void setDietType(String dietType) {
         this.dietType = dietType;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public void setPrice(double price) {
