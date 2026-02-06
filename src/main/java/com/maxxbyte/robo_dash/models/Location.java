@@ -2,18 +2,18 @@ package com.maxxbyte.robo_dash.models;
 
 public class Location {
 
-    int id;
+    int locationId;
     String name;
     LocationType type;
     long latitude;
     long longitude;
 
-    public int getId() {
-        return id;
+    public int getLocationId() {
+        return locationId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int locationId) {
+        this.locationId = locationId;
     }
 
     public String getName() {

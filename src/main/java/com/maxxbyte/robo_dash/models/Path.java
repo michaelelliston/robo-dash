@@ -2,18 +2,18 @@ package com.maxxbyte.robo_dash.models;
 
 public class Path {
 
-    int id;
+    int pathId;
     int fromLocationId;
     int toLocationId;
     int distance; // measured in meters
     PathType pathType;
 
     public int getId() {
-        return id;
+        return pathId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int pathId) {
+        this.pathId = pathId;
     }
 
     public int getFromLocationId() {
