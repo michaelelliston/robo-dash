@@ -5,3 +5,13 @@
 */
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
+document.addEventListener("DOMContentLoaded", () => {
+  const cartBtn = document.getElementById("cartBtn");
+  if (!cartBtn) return;
+
+  cartBtn.addEventListener("click", () => {
+    const path = window.location.pathname;
+    const isInPagesFolder = path.includes("/pages/");
+    window.location.href = isInPagesFolder ? "cart.html" : "pages/cart.html";
+  });
+});
