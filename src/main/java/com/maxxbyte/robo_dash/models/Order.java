@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Order {
 
-    User customer;
+    int userId;
     String deliveryLocation;
     double totalPrice;
 
