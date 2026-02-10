@@ -9,6 +9,15 @@ public class Route {
     private List<Path> paths;
     private int totalDistance;
 
+    public Route() {}
+
+    public Route(Location startingLocation, Location destination, List<Path> paths, int totalDistance) {
+        this.startingLocation = startingLocation;
+        this.destination = destination;
+        this.paths = paths;
+        this.totalDistance = totalDistance;
+    }
+
     public Location getStartingLocation() {
         return startingLocation;
     }

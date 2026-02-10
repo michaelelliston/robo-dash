@@ -8,6 +8,16 @@ public class Path {
     int distance; // measured in meters
     PathType pathType;
 
+    public Path() {}
+
+    public Path(int pathId, int fromLocationId, int toLocationId, int distance, PathType pathType) {
+        this.pathId = pathId;
+        this.fromLocationId = fromLocationId;
+        this.toLocationId = toLocationId;
+        this.distance = distance;
+        this.pathType = pathType;
+    }
+
     public int getId() {
         return pathId;
     }

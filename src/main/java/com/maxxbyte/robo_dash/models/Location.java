@@ -8,6 +8,16 @@ public class Location {
     long latitude;
     long longitude;
 
+    public Location() {}
+
+    public Location(int locationId, String name, LocationType type, long latitude, long longitude) {
+        this.locationId = locationId;
+        this.name = name;
+        this.type = type;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public int getLocationId() {
         return locationId;
     }
