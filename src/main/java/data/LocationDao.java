@@ -16,17 +16,17 @@ public class LocationDao extends DaoBase{
         super(dataSource);
     }
 
-    public List<Location> getAllLocations() {
-        String sql = "SELECT * FROM location";
-        //try
-        //return;
-    }
+//    public List<Location> getAllLocations() {
+//        String sql = "SELECT * FROM location";
+//        //try
+//        //return;
+//    }
 
     private Location mapRow(ResultSet row) throws SQLException
     {
         int id = row.getInt("location_id");
         String name = row.getString("building_name");
-       // LocationType locationType = row.get("description");
+//        LocationType locationType = row.getString("description");
 
         Location location = new Location()
         {{
