@@ -3,15 +3,13 @@ package com.maxxbyte.robo_dash.models;
 public class Category {
     private int categoryId;
     private String categoryName;
-    private String categoryDescription;
 
     public Category() {
     }
 
-    public Category(int categoryId, String categoryName, String categoryDescription) {
+    public Category(int categoryId, String categoryName) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
-        this.categoryDescription = categoryDescription;
     }
 
     public int getCategoryId() {
@@ -30,11 +28,4 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public String getCategoryDescription() {
-        return categoryDescription;
-    }
-
-    public void setCategoryDescription(String categoryDescription) {
-        this.categoryDescription = categoryDescription;
-    }
 }
