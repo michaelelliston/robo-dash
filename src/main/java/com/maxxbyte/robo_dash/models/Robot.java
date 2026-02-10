@@ -4,16 +4,24 @@ public class Robot {
 
     //TODO: implement battery drain based on meters traveled
     private int id;
-    private int batteryLevel = 100; // Percentage of battery
-    private SurfaceType speed = SurfaceType.WALKWAY;
-    private RobotStatus status = RobotStatus.IDLE;
-    private boolean turnSignal = false;
+    private int batteryLevel; // Percentage of battery
+    private SurfaceType currentSpeed;
+    private RobotStatus status;
+    private boolean turnSignal;
     private Order currentOrder;
-    // Location currentLocation;  TODO: Create a Location model
-    // Route currentRoute;   TODO: Create a Route model
+    Location currentLocation;
+    Route currentRoute;
 
-    public Robot() {
+    public Robot() {}
 
+    public Robot(int id) {
+        this.id = id;
+        this.batteryLevel = 100;
+        this.status = RobotStatus.IDLE;
+        this.turnSignal = false;
+        this.currentOrder = null;
+        this.currentLocation = null;
+        this.currentRoute = null;
     }
 
     //TODO: implement ability to obtain customer location via their ID, map a route, and then start the delivery.
@@ -70,10 +78,36 @@ public class Robot {
         this.id = id;
     }
 
-    // Parameters are assumed, use as necessary. TODO:
+    public SurfaceType getCurrentSpeed() {
+        return currentSpeed;
+    }
+
+    public void setCurrentSpeed(SurfaceType currentSpeed) {
+        this.currentSpeed = currentSpeed;
+    }
+
+    // Parameters are assumed, use as necessary.
     // public Location getCustomerLocation(int customerId) {}
-    // public Location getCurrentLocation() {}
-    // public Route mapRoute(Location customerLocation, Location currentLocation) {}
-    // public Route getCurrentRoute() {}
+
+    public void setBatteryLevel(int batteryLevel) {
+        this.batteryLevel = batteryLevel;
+    }
+    public Location getCurrentLocation() {
+        return this.currentLocation;
+    }
+
+    public void setCurrentLocation(Location currentLocation) {
+        this.currentLocation = currentLocation;
+    }
+
+    // TODO: public Route mapRoute(Location customerLocation, Location currentLocation) {}
+
+
+    public Route getCurrentRoute() {
+        return this.currentRoute;
+    }
+    public void setCurrentRoute(Route currentRoute) {
+        this.currentRoute = currentRoute;
+    }
 
 }
