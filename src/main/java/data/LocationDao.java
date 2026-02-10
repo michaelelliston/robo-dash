@@ -22,18 +22,15 @@ public class LocationDao extends DaoBase{
 //        //return;
 //    }
 
-    private Location mapRow(ResultSet row) throws SQLException
-    {
-        int id = row.getInt("location_id");
-        String name = row.getString("building_name");
-//        LocationType locationType = row.getString("description");
-
-        Location location = new Location()
-        {{
-        //    setid(location_id);
-
-        }};
-
-        return location;
-    }
+//    private Location mapRow(ResultSet row) throws SQLException
+//    {
+//        int id = row.getInt("location_id");
+//        String name = row.getString("building_name");
+//        String locationString = row.getString("location_type");
+//        LocationType locationType = LocationType.valueOf(locationString);
+//        long latitude = row.getLong("latitude");
+//        long longitude = row.getLong("longitude");
+//
+//        return new Location(id,name,locationType,latitude,longitude);
+//    }
 }
