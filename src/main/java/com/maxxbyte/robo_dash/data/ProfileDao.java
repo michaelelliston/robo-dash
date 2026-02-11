@@ -1,6 +1,5 @@
-package data;
+package com.maxxbyte.robo_dash.data;
 
-import com.maxxbyte.robo_dash.models.Product;
 import com.maxxbyte.robo_dash.models.Profile;
 import org.springframework.stereotype.Component;
 

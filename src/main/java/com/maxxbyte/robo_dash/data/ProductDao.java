@@ -1,6 +1,5 @@
-package data;
+package com.maxxbyte.robo_dash.data;
 
-import com.maxxbyte.robo_dash.models.Location;
 import com.maxxbyte.robo_dash.models.Product;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 @Component
 public class ProductDao extends DaoBase {

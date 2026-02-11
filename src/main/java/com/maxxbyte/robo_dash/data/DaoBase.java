@@ -1,4 +1,4 @@
-package data;
+package com.maxxbyte.robo_dash.data;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

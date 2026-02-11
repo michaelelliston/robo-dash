@@ -1,17 +1,37 @@
-package data;
+package com.maxxbyte.robo_dash.data;
 
-import com.maxxbyte.robo_dash.models.Location;
-import com.maxxbyte.robo_dash.models.LocationType;
-import com.maxxbyte.robo_dash.models.Path;
-import com.maxxbyte.robo_dash.models.PathType;
+import com.maxxbyte.robo_dash.models.*;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PathDao extends DaoBase{
     public PathDao(DataSource dataSource) {super(dataSource);}
+
+    public Path getById(int pathId)
+    {
+        String sql = "SELECT * FROM products WHERE path_id = ?";
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, pathId);
+
+            ResultSet row = statement.executeQuery();
+
+            if (row.next())
+            {
+                return mapRow(row);
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 
     private Path mapRow(ResultSet row) throws SQLException
     {
