@@ -6,7 +6,7 @@ import java.util.Map;
 public class Order {
 
     int userId;
-    String deliveryLocation;
+    int deliveryLocationId;
     double totalPrice;
 
     Map<Integer, OrderItem> items = new HashMap<>();
@@ -34,5 +34,20 @@ public class Order {
             totalPrice += p.getPrice();
         }
         return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getDeliveryLocationId() {
+        return deliveryLocationId;
     }
 }

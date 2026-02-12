@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>=RoboDash - homepage</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="Images/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../css/styles.css" rel="stylesheet" />
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#!">RoboDash</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="../pages/order.html">Order</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pages/cart.html">Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pages/profile.html">Profile</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">All Products</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                        <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                    </ul>
+                </li>
+            </ul>
+                <form class="d-flex">
+                    <button
+                            id="cartBtn"
+                            class="btn btn-outline-dark"
+                            type="button"
+                    >
+                    <i class="bi-cart-fill me-1"></i>
+                    Cart
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Order</h1>
+            <p class="lead fw-normal text-white-50 mb-0">What to pick</p>
+        </div>
+    </div>
+</header>
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <!-- Filters -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <label class="form-label">Diet</label>
+                <select id="dietFilter" class="form-select">
+                    <option value="all">All</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="non-vegetarian">Non-Vegetarian</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Price</label>
+                <select id="priceFilter" class="form-select">
+                    <option value="all">All</option>
+                    <option value="0-10">$0–10</option>
+                    <option value="10-15">$10–15</option>
+                    <option value="15-999">$15+</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="non-vegetarian"
+                 data-price="11.99">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top"
+                         src="../assets/images/Chicken-Teriyaki.jpg"
+                         alt="Chicken Teriyaki Bowl">
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Chicken Teriyaki Bowl</h5>
+                            <!-- Product price-->
+                            $11.99
+                            <p class="text-muted small mt-2">
+                                Grilled chicken served over rice with teriyaki sauce and vegetables.
+                            </p>
+                            <p class="small mt-1 text-danger">
+                                <strong>Non-Vegetarian</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="non-vegetarian"
+                 data-price="10.49">
+
+            <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <!-- Product image-->
+                    <img class="card-img-top"
+                         src="../assets/images/Shredded-Beef-Quesadillas.jpg"
+                         alt="Beef Quesadilla">
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Beef Quesadilla</h5>
+                            <!-- Product price-->
+                            $10.49
+                            <p class="text-muted small mt-2">
+                                Seasoned beef with melted cheese in a toasted tortilla.
+                            </p>
+                            <p class="small mt-1 text-danger">
+                                <strong>Non-Vegetarian</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5"
+                data-menu-item
+                data-diet="vegetarian"
+                data-price="9.99">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <!-- Product image-->
+                    <img class="card-img-top"
+                         src="../assets/images/Veggie-Fried_Rice.webp"
+                         alt="Veggie Fried Rice">
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Veggie Fried Rice</h5>
+                            <!-- Product price-->
+                            $9.99
+                            <p class="text-muted small mt-2">
+                                Stir-fried rice with mixed vegetables and soy seasoning
+                            </p>
+                            <p class="small mt-1 text-success">
+                                <strong>Vegetarian</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="vegan"
+                 data-price="9.49">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top"
+                         src="../assets/images/Spaghetti-Marinara-Recipe.webp"
+                         alt="Spaghetti Marinara">
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Spaghetti Marinara</h5>
+                            <!-- Product price-->
+                            $9.49
+                            <p class="text-muted small mt-2">
+                                Spaghetti pasta topped with house-made marinara sauce
+                            </p>
+                            <p class="small mt-1 text-success">
+                                <strong>Vegan</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="non-vegetarian"
+                 data-price="11.49">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <!-- Product image-->
+                    <img class="card-img-top"
+                         src="../assets/images/chicken-alfredo.jpg"
+                         alt="Chicken Alfredo">
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Chicken Alfredo Pasta</h5>
+                            <!-- Product price-->
+                            $11.49
+                            <p class="text-muted small mt-2">
+                                Creamy alfredo pasta with grilled chicken
+                            </p>
+                            <p class="small mt-1 text-danger">
+                                <strong>Non-Vegetarian</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="non-vegetarian"
+                 data-price="10.99">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top"
+                         src="../assets/images/Cheeseburger.webp"
+                         alt="Cheeseburger">
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Cheeseburger</h5>
+                            <!-- Product price-->
+                            $10.99
+                            <p class="text-muted small mt-2">
+                                Beef patty with melted cheese, lettuce, and tomato on a bun
+                            </p>
+                            <p class="small mt-1 text-danger">
+                                <strong>Non-Vegetarian</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="non-vegetarian"
+                 data-price="9.99">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <!-- Product image-->
+                    <img class="card-img-top"
+                         src="../assets/images/Grilled%20chicken%20wrap.jpg"
+                         alt="Grilled Chicken Wrap">
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Grilled Chicken Wrap</h5>
+                            <!-- Product price-->
+                            $9.99
+                            <p class="text-muted small mt-2">
+                                Grilled chicken with lettuce and sauce wrapped in a tortilla
+                            </p>
+                            <p class="small mt-1 text-danger">
+                                <strong>Non-Vegetarian</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="non-vegetarian"
+                 data-price="10.49">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top"
+                         src="../assets/images/BBq-Chicken-Flatbread.webp"
+                         alt="BBQ Chicken Flatbread">
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">BBQ Chicken Flatbread</h5>
+                            <!-- Product price-->
+                            $10.49
+                            <p class="text-muted small mt-2">
+                                Flatbread topped with BBQ sauce, chicken, and cheese
+                            </p>
+                            <p class="small mt-1 text-danger">
+                                <strong>Non-Vegetarian</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                    </div>
+                </div>
+            </div>
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="non-vegetarian"
+         data-price="10.49">
+        <div class="card h-100">
+            <!-- Product image-->
+            <img class="card-img-top"
+                 src="../assets/images/Shrimp-Tacos.jpg"
+                 alt="Shrimp Tacos">
+            <!-- Product details-->
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <!-- Product name-->
+                    <h5 class="fw-bolder">Shrimp Tacos</h5>
+                    <!-- Product price-->
+                    $10.49
+                    <p class="text-muted small mt-2">
+                        Seasoned shrimp served in soft tortillas with slaw
+                    </p>
+                    <p class="small mt-1 text-danger">
+                        <strong>Non-Vegetarian</strong>
+                    </p>
+                </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegetarian"
+         data-price="9.99">
+        <div class="card h-100">
+            <!-- Product image-->
+            <img class="card-img-top"
+                 src="../assets/images/Vegan-Burrito-Bowls.jpg"
+                 alt="Veggie Burrito Bowl">
+            <!-- Product details-->
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <!-- Product name-->
+                    <h5 class="fw-bolder">Veggie Burrito Bowl</h5>
+                    <!-- Product price-->
+                    $9.99
+                    <p class="text-muted small mt-2">
+                        Rice bowl with beans, vegetables, and fresh toppings
+                    </p>
+                    <p class="small mt-1 text-success">
+                        <strong>Vegetarian</strong>
+                    </p>
+                </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="non-vegetarian"
+         data-price="10.49">
+        <div class="card h-100">
+            <!-- Product image-->
+            <img class="card-img-top"
+                 src="../assets/images/Turkey-Panini.jpg"
+                 alt="Turkey Panini">
+            <!-- Product details-->
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <!-- Product name-->
+                    <h5 class="fw-bolder">Turkey panini</h5>
+                    <!-- Product price-->
+                    $10.49
+                    <p class="text-muted small mt-2">
+                        Grilled panini with sliced turkey and melted cheese
+                    </p>
+                    <p class="small mt-1 text-danger">
+                        <strong>Non-Vegetarian</strong>
+                    </p>
+                </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="non-vegetarian"
+         data-price="10.99">
+        <div class="card h-100">
+            <!-- Product image-->
+            <img class="card-img-top"
+                 src="../assets/images/Flatbread-Pepperoni-Pizza-Recipe.png"
+                 alt="Pepperoni Flatbread">
+            <!-- Product details-->
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <!-- Product name-->
+                    <h5 class="fw-bolder">Pepperoni Flatbread</h5>
+                    <!-- Product price-->
+                    $10.99
+                    <p class="text-muted small mt-2">
+                        Flatbread topped with pepperoni and melted mozzarella
+                    </p>
+                    <p class="small mt-1 text-danger">
+                        <strong>Non-Vegetarian</strong>
+                    </p>
+                </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                    <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+    <hr class="my-5">
+    <h2 class="fw-bolder mb-4 text-center">Drinks</h2>
+
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="2.49">
+        <div class="card h-100">
+            <img class="card-img-top"
+                 src="../assets/images/iced-tea.webp"
+                 alt="Iced Tea">
+
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <h5 class="fw-bolder">Iced Tea</h5>
+                    $2.49
+
+                    <p class="text-muted small mt-2">
+                        Freshly brewed tea served chilled over ice.
+                    </p>
+
+                    <p class="small mt-1 text-success">
+                        <strong>Vegan</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                    <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="2.99">
+        <div class="card h-100">
+            <img class="card-img-top"
+                 src="../assets/images/Lemonade.webp"
+                 alt="Lemonade">
+
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <h5 class="fw-bolder">Lemonade</h5>
+                    $2.99
+                    <p class="text-muted small mt-2">
+                        Refreshing lemonade made with real lemon flavor.
+                    </p>
+                    <p class="small mt-1 text-success">
+                        <strong>Vegan</strong>
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                    <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="2.49">
+        <div class="card h-100">
+            <img class="card-img-top"
+                 src="../assets/images/Cola.jpg"
+                 alt="Cola">
+
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <h5 class="fw-bolder">Cola</h5>
+                    $2.49
+                    <p class="text-muted small mt-2">
+                        Classic carbonated cola served chilled.
+                    </p>
+                    <p class="small mt-1 text-success">
+                        <strong>Vegan</strong>
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                    <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="1.99">
+        <div class="card h-100">
+            <img class="card-img-top"
+                 src="../assets/images/bottled_water.jpeg"
+                 alt="Bottled Water">
+
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <h5 class="fw-bolder">Bottled Water</h5>
+                    $1.99
+
+                    <p class="text-muted small mt-2">
+                        Pure, chilled bottled water for quick refreshment.
+                    </p>
+
+                    <p class="small mt-1 text-success">
+                        <strong>Vegan</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                    <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="2.99">
+        <div class="card h-100">
+            <img class="card-img-top"
+                 src="../assets/images/Orange-Juice.jpg"
+                 alt="Orange Juice">
+
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <h5 class="fw-bolder">Orange Juice</h5>
+                    $2.99
+
+                    <p class="text-muted small mt-2">
+                        Cold-pressed orange juice with natural sweetness.
+                    </p>
+
+                    <p class="small mt-1 text-success">
+                        <strong>Vegan</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                    <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="2.99">
+        <div class="card h-100">
+            <img class="card-img-top"
+                 src="../assets/images/Apple-Juice.jpg"
+                 alt="Apple Juice">
+
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <h5 class="fw-bolder">Apple Juice</h5>
+                    $2.99
+
+                    <p class="text-muted small mt-2">
+                        Crisp and refreshing apple juice served cold
+                    </p>
+
+                    <p class="small mt-1 text-success">
+                        <strong>Vegan</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                    <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegetarian"
+         data-price="3.49">
+        <div class="card h-100">
+            <img class="card-img-top"
+                 src="../assets/images/Iced-Coffee.jpg"
+                 alt="Iced Coffee">
+
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <h5 class="fw-bolder">Iced Coffee</h5>
+                    $3.49
+
+                    <p class="text-muted small mt-2">
+                        Chilled brewed coffee served over ice.
+                    </p>
+
+                    <p class="small mt-1 text-success">
+                        <strong>Vegetarian</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                    <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="2.49">
+        <div class="card h-100">
+            <img class="card-img-top"
+                 src="../assets/images/Sparklimg%20water.webp"
+                 alt="Sparkling Water">
+
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <h5 class="fw-bolder">Sparkling Water</h5>
+                    $2.49
+
+                    <p class="text-muted small mt-2">
+                        Carbonated sparkling water with a clean, crisp finish.
+                    </p>
+
+                    <p class="small mt-1 text-success">
+                        <strong>Vegan</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                    <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+            <hr class="my-5" />
+            <h2 class="fw-bolder mb-4 text-center">Sides</h2>
+
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegan"
+                         data-price="3.49">
+                        <div class="card h-100">
+                            <img class="card-img-top"
+                                 src="../assets/images/French-Fries.jpg"
+                                 alt="French Fries">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">French Fries</h5>
+                                    $3.49
+                                    <p class="text-muted small mt-2">Crispy, golden-brown fries lightly seasoned and cooked fresh for a perfect crunch.</p>
+                                    <p class="small mt-1 text-success"><strong>Vegan</strong></p>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegan"
+                         data-price="3.99">
+                        <div class="card h-100">
+                            <img class="card-img-top"
+                                 src="../assets/images/Side-Salad.jpg"
+                                 alt="Side salad">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">Side Salad</h5>
+                                    $3.99
+                                    <p class="text-muted small mt-2">A fresh mix of crisp greens, tomatoes, and cucumbers served with your choice of dressing.</p>
+                                    <p class="small mt-1 text-success"><strong>Vegan</strong></p>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegetarian"
+                         data-price="2.99">
+                        <div class="card h-100">
+                            <img class="card-img-top"
+                                 src="../assets/images/Garlic-Bread.webp"
+                                 alt="Garlic bread">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">Garlic Bread</h5>
+                                    $2.99
+                                    <p class="text-muted small mt-2">Warm toasted bread brushed with garlic butter and herbs, lightly crisp on the outside.</p>
+                                    <p class="small mt-1 text-success"><strong>Vegetarian</strong></p>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegan"
+                         data-price="3.49">
+                        <div class="card h-100">
+                            <img class="card-img-top"
+                                 src="../assets/images/Steamed-Veggies.jpg"
+                                 alt="Steamed Veggies">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">Steamed Veggies</h5>
+                                    $3.49
+                                    <p class="text-muted small mt-2">A healthy blend of seasonal vegetables steamed to retain flavor and nutrients.</p>
+                                    <p class="small mt-1 text-success"><strong>Vegan</strong></p>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegetarian"
+                         data-price="3.99">
+                        <div class="card h-100">
+                            <img class="card-img-top"
+                                 src="../assets/images/onion-rings.webp"
+                                 alt="Onion Rings">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">Onion Rings</h5>
+                                    $3.99
+                                    <p class="text-muted small mt-2">Thick-cut onion rings battered and fried until crispy and golden.</p>
+                                    <p class="small mt-1 text-success"><strong>Vegetarian</strong></p>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegetarian"
+                         data-price="3.99">
+                        <div class="card h-100">
+                            <img class="card-img-top"
+                                 src="../assets/images/Mac-cheese.jpg"
+                                 alt="Mac and cheese">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">Mac and Cheese</h5>
+                                    $3.99
+                                    <p class="text-muted small mt-2">Creamy macaroni tossed in a rich, melted cheese sauce.</p>
+                                    <p class="small mt-1 text-success"><strong>Vegetarian</strong></p>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegetarian"
+                         data-price="3.49">
+                        <div class="card h-100">
+                            <img class="card-img-top"
+                                 src="../assets/images/Mashed-Potatoes.jpg"
+                                 alt="Mashed Potatoes">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">Mashed Potatoes</h5>
+                                    $3.49
+                                    <p class="text-muted small mt-2">Smooth and buttery mashed potatoes whipped to a creamy consistency.</p>
+                                    <p class="small mt-1 text-success"><strong>Vegetarian</strong></p>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegetarian"
+                         data-price="2.99">
+                        <div class="card h-100">
+                            <img class="card-img-top"
+                                 src="../assets/images/Coleslaw.jpg"
+                                 alt="Coleslaw">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">Coleslaw</h5>
+                                    $2.99
+                                    <p class="text-muted small mt-2">Freshly shredded cabbage and carrots tossed in a light, tangy dressing.</p>
+                                    <p class="small mt-1 text-success"><strong>Vegetarian</strong></p>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegan"
+                         data-price="3.49">
+                        <div class="card h-100">
+                            <img class="card-img-top"
+                                 src="../assets/images/Fruit-cup.jpg"
+                                 alt="Fruit Cup">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">Fruit Cup</h5>
+                                    $3.49
+                                    <p class="text-muted small mt-2">A refreshing mix of fresh, seasonal fruits, chilled and ready to enjoy.</p>
+                                    <p class="small mt-1 text-success"><strong>Vegan</strong></p>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegetarian"
+                         data-price="4.49">
+                        <div class="card h-100">
+                            <img class="card-img-top"
+                                 src="../assets/images/Mozzarella-Sticks.jpg"
+                                 alt="Mozzarella Sticks">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">Mozzarella Sticks</h5>
+                                    $4.49
+                                    <p class="text-muted small mt-2">Breaded mozzarella cheese sticks fried until crispy with a gooey center.</p>
+                                    <p class="small mt-1 text-success"><strong>Vegetarian</strong></p>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</section>
+<!-- Footer-->
+<footer class="py-5 bg-dark">
+    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; RoboDash 2026</p></div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="../js/scripts.js"></script>
+<script>
+    function parseRange(range) {
+        if (range === "all") return {min: 0, max: Infinity};
+        const parts = range.split("-");
+        return {min: Number(parts[0]), max: Number(parts[1])};
+    }
+
+    function applyFilters() {
+        const diet = document.getElementById("dietFilter").value;
+        const priceRange = parseRange(document.getElementById("priceFilter").value);
+
+        const items = document.querySelectorAll("[data-menu-item]");
+
+        items.forEach(item => {
+            const itemDiet = item.dataset.diet;
+            const itemPrice = Number(item.dataset.price);
+
+            const dietMatch = diet === "all" || diet === itemDiet;
+            const priceMatch = itemPrice >= priceRange.min && itemPrice <= priceRange.max;
+
+            if (dietMatch && priceMatch) {
+                item.classList.remove("d-none");
+            } else {
+                item.classList.add("d-none");
+            }
+        });
+    }
+
+    document.getElementById("dietFilter").addEventListener("change", applyFilters);
+    document.getElementById("priceFilter").addEventListener("change", applyFilters);
+</script>
+
+</body>
+</html>
