@@ -1,5 +1,7 @@
 package com.maxxbyte.robo_dash.models;
 
+import com.maxxbyte.robo_dash.services.NavigationService;
+
 public class Robot {
 
     //TODO: implement battery drain based on meters traveled
@@ -8,9 +10,11 @@ public class Robot {
     private SurfaceType currentSpeed;
     private RobotStatus status;
     private boolean turnSignal;
+    private NavigationService navigationService;
     private Order currentOrder;
-    Location currentLocation;
-    Route currentRoute;
+    private Location currentLocation;
+    //private final Location homeLocation;
+    private Route currentRoute;
 
     public Robot() {}
 
@@ -19,9 +23,7 @@ public class Robot {
         this.batteryLevel = 100;
         this.status = RobotStatus.IDLE;
         this.turnSignal = false;
-        this.currentOrder = null;
-        this.currentLocation = null;
-        this.currentRoute = null;
+        //this.homeLocation = LocationDao.getLocationById(61);
     }
 
     //TODO: implement ability to obtain customer location via their ID, map a route, and then start the delivery.
@@ -31,21 +33,12 @@ public class Robot {
         if (this.batteryLevel <= 40) {
             chargeBattery();
         }
-        //startDelivery(customerId);
+        calculateDeliveryRoute(currentOrder);
     }
 
     //public void startDelivery(int customerId) {
         //status = RobotStatus.DELIVERING;
         //currentRoute = mapRoute(getCustomerLocation(customerId), currentLocation);
-    //}
-
-    //public SurfaceType checkSurfaceType(Location currentLocation) {
-        //if (currentLocation.getSurfaceType == SurfaceType.WALKWAY) {
-            //speed = SurfaceType.WALKWAY;
-        //} else if (currentLocation.getSurfaceType == SurfaceType.ROADWAY) {
-            //speed = SurfaceType.ROADWAY;
-        //} else {
-            // Possible Navigation error if not currently on roadway or walkway
     //}
 
     public void chargeBattery() {
@@ -100,14 +93,13 @@ public class Robot {
         this.currentLocation = currentLocation;
     }
 
-    // TODO: public Route mapRoute(Location customerLocation, Location currentLocation) {}
+    // TODO: Implement this method
+    public void calculateDeliveryRoute(Order order) {
+
+    }
 
 
     public Route getCurrentRoute() {
         return this.currentRoute;
     }
-    public void setCurrentRoute(Route currentRoute) {
-        this.currentRoute = currentRoute;
-    }
-
 }
