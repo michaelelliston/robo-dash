@@ -13,7 +13,7 @@ public class CategoryDao extends DaoBase{
 
     public Category getById(int categoryId)
     {
-        String sql = "SELECT * FROM products WHERE category_id = ?";
+        String sql = "SELECT * FROM categories WHERE category_id = ?";
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);

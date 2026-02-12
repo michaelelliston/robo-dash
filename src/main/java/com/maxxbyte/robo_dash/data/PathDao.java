@@ -13,7 +13,7 @@ public class PathDao extends DaoBase{
 
     public Path getById(int pathId)
     {
-        String sql = "SELECT * FROM products WHERE path_id = ?";
+        String sql = "SELECT * FROM paths WHERE path_id = ?";
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);
