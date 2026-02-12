@@ -61,8 +61,34 @@
 <!-- Section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
+        <!-- Filters -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <label class="form-label">Diet</label>
+                <select id="dietFilter" class="form-select">
+                    <option value="all">All</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="non-vegetarian">Non-Vegetarian</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Price</label>
+                <select id="priceFilter" class="form-select">
+                    <option value="all">All</option>
+                    <option value="0-10">$0–10</option>
+                    <option value="10-15">$10–15</option>
+                    <option value="15-999">$15+</option>
+                </select>
+            </div>
+        </div>
+
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <div class="col mb-5">
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="non-vegetarian"
+                 data-price="11.99">
                 <div class="card h-100">
                     <!-- Product image-->
                     <img class="card-img-top"
@@ -90,8 +116,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col mb-5">
-                <div class="card h-100">
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="non-vegetarian"
+                 data-price="10.49">
+
+            <div class="card h-100">
                     <!-- Sale badge-->
                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                     <!-- Product image-->
@@ -119,7 +149,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col mb-5">
+            <div class="col mb-5"
+                data-menu-item
+                data-diet="vegetarian"
+                data-price="9.99">
                 <div class="card h-100">
                     <!-- Sale badge-->
                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
@@ -148,7 +181,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col mb-5">
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="vegan"
+                 data-price="9.49">
                 <div class="card h-100">
                     <!-- Product image-->
                     <img class="card-img-top"
@@ -175,7 +211,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col mb-5">
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="non-vegetarian"
+                 data-price="11.49">
                 <div class="card h-100">
                     <!-- Sale badge-->
                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
@@ -204,7 +243,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col mb-5">
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="non-vegetarian"
+                 data-price="10.99">
                 <div class="card h-100">
                     <!-- Product image-->
                     <img class="card-img-top"
@@ -231,7 +273,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col mb-5">
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="non-vegetarian"
+                 data-price="9.99">
                 <div class="card h-100">
                     <!-- Sale badge-->
                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
@@ -260,7 +305,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col mb-5">
+            <div class="col mb-5"
+                 data-menu-item
+                 data-diet="non-vegetarian"
+                 data-price="10.49">
                 <div class="card h-100">
                     <!-- Product image-->
                     <img class="card-img-top"
@@ -287,7 +335,10 @@
                     </div>
                 </div>
             </div>
-    <div class="col mb-5">
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="non-vegetarian"
+         data-price="10.49">
         <div class="card h-100">
             <!-- Product image-->
             <img class="card-img-top"
@@ -297,7 +348,7 @@
             <div class="card-body p-4">
                 <div class="text-center">
                     <!-- Product name-->
-                    <h5 class="fw-bolder">Shrimp acos</h5>
+                    <h5 class="fw-bolder">Shrimp Tacos</h5>
                     <!-- Product price-->
                     $10.49
                     <p class="text-muted small mt-2">
@@ -314,7 +365,10 @@
             </div>
         </div>
     </div>
-    <div class="col mb-5">
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegetarian"
+         data-price="9.99">
         <div class="card h-100">
             <!-- Product image-->
             <img class="card-img-top"
@@ -341,7 +395,10 @@
             </div>
         </div>
     </div>
-    <div class="col mb-5">
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="non-vegetarian"
+         data-price="10.49">
         <div class="card h-100">
             <!-- Product image-->
             <img class="card-img-top"
@@ -368,7 +425,10 @@
             </div>
         </div>
     </div>
-    <div class="col mb-5">
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="non-vegetarian"
+         data-price="10.99">
         <div class="card h-100">
             <!-- Product image-->
             <img class="card-img-top"
@@ -404,7 +464,10 @@
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
-    <div class="col mb-5">
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="2.49">
         <div class="card h-100">
             <img class="card-img-top"
                  src="../assets/images/iced-tea.webp"
@@ -432,7 +495,10 @@
             </div>
         </div>
     </div>
-    <div class="col mb-5">
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="2.99">
         <div class="card h-100">
             <img class="card-img-top"
                  src="../assets/images/Lemonade.webp"
@@ -459,7 +525,10 @@
             </div>
         </div>
     </div>
-    <div class="col mb-5">
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="2.49">
         <div class="card h-100">
             <img class="card-img-top"
                  src="../assets/images/Cola.jpg"
@@ -486,7 +555,10 @@
             </div>
         </div>
     </div>
-    <div class="col mb-5">
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="1.99">
         <div class="card h-100">
             <img class="card-img-top"
                  src="../assets/images/bottled_water.jpeg"
@@ -514,7 +586,10 @@
             </div>
         </div>
     </div>
-    <div class="col mb-5">
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="2.99">
         <div class="card h-100">
             <img class="card-img-top"
                  src="../assets/images/Orange-Juice.jpg"
@@ -542,7 +617,10 @@
             </div>
         </div>
     </div>
-    <div class="col mb-5">
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="2.99">
         <div class="card h-100">
             <img class="card-img-top"
                  src="../assets/images/Apple-Juice.jpg"
@@ -570,7 +648,10 @@
             </div>
         </div>
     </div>
-    <div class="col mb-5">
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegetarian"
+         data-price="3.49">
         <div class="card h-100">
             <img class="card-img-top"
                  src="../assets/images/Iced-Coffee.jpg"
@@ -598,7 +679,10 @@
             </div>
         </div>
     </div>
-    <div class="col mb-5">
+    <div class="col mb-5"
+         data-menu-item
+         data-diet="vegan"
+         data-price="2.49">
         <div class="card h-100">
             <img class="card-img-top"
                  src="../assets/images/Sparklimg%20water.webp"
@@ -633,7 +717,10 @@
 
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <div class="col mb-5">
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegan"
+                         data-price="3.49">
                         <div class="card h-100">
                             <img class="card-img-top"
                                  src="../assets/images/French-Fries.jpg"
@@ -651,7 +738,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegan"
+                         data-price="3.99">
                         <div class="card h-100">
                             <img class="card-img-top"
                                  src="../assets/images/Side-Salad.jpg"
@@ -669,7 +759,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegetarian"
+                         data-price="2.99">
                         <div class="card h-100">
                             <img class="card-img-top"
                                  src="../assets/images/Garlic-Bread.webp"
@@ -687,7 +780,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegan"
+                         data-price="3.49">
                         <div class="card h-100">
                             <img class="card-img-top"
                                  src="../assets/images/Steamed-Veggies.jpg"
@@ -705,7 +801,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegetarian"
+                         data-price="3.99">
                         <div class="card h-100">
                             <img class="card-img-top"
                                  src="../assets/images/onion-rings.webp"
@@ -723,7 +822,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegetarian"
+                         data-price="3.99">
                         <div class="card h-100">
                             <img class="card-img-top"
                                  src="../assets/images/Mac-cheese.jpg"
@@ -741,7 +843,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegetarian"
+                         data-price="3.49">
                         <div class="card h-100">
                             <img class="card-img-top"
                                  src="../assets/images/Mashed-Potatoes.jpg"
@@ -759,7 +864,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegetarian"
+                         data-price="2.99">
                         <div class="card h-100">
                             <img class="card-img-top"
                                  src="../assets/images/Coleslaw.jpg"
@@ -777,7 +885,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegan"
+                         data-price="3.49">
                         <div class="card h-100">
                             <img class="card-img-top"
                                  src="../assets/images/Fruit-cup.jpg"
@@ -795,7 +906,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5"
+                         data-menu-item
+                         data-diet="vegetarian"
+                         data-price="4.49">
                         <div class="card h-100">
                             <img class="card-img-top"
                                  src="../assets/images/Mozzarella-Sticks.jpg"
@@ -824,5 +938,37 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="../js/scripts.js"></script>
+<script>
+    function parseRange(range) {
+        if (range === "all") return {min: 0, max: Infinity};
+        const parts = range.split("-");
+        return {min: Number(parts[0]), max: Number(parts[1])};
+    }
+
+    function applyFilters() {
+        const diet = document.getElementById("dietFilter").value;
+        const priceRange = parseRange(document.getElementById("priceFilter").value);
+
+        const items = document.querySelectorAll("[data-menu-item]");
+
+        items.forEach(item => {
+            const itemDiet = item.dataset.diet;
+            const itemPrice = Number(item.dataset.price);
+
+            const dietMatch = diet === "all" || diet === itemDiet;
+            const priceMatch = itemPrice >= priceRange.min && itemPrice <= priceRange.max;
+
+            if (dietMatch && priceMatch) {
+                item.classList.remove("d-none");
+            } else {
+                item.classList.add("d-none");
+            }
+        });
+    }
+
+    document.getElementById("dietFilter").addEventListener("change", applyFilters);
+    document.getElementById("priceFilter").addEventListener("change", applyFilters);
+</script>
+
 </body>
 </html>
