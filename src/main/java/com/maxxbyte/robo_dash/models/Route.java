@@ -1,5 +1,6 @@
 package com.maxxbyte.robo_dash.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Route {
@@ -16,6 +17,12 @@ public class Route {
         this.destination = destination;
         this.paths = paths;
         this.totalDistance = totalDistance;
+    }
+
+    public Route(Location startLocation, Location destination, ArrayList<Path> paths) {
+        this.startingLocation = startLocation;
+        this.destination = destination;
+        this.paths = paths;
     }
 
     public Location getStartingLocation() {

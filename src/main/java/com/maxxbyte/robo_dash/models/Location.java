@@ -1,5 +1,7 @@
 package com.maxxbyte.robo_dash.models;
 
+import java.util.Objects;
+
 public class Location {
 
     int locationId;
@@ -56,5 +58,18 @@ public class Location {
 
     public void setLongitude(long longitude) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return locationId == location.locationId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(locationId);
     }
 }
