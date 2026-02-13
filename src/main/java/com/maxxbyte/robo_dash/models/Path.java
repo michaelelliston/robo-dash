@@ -70,5 +70,21 @@ public class Path {
         this.pathType = pathType;
     }
 
+    public Location getToLocation() {
+        return toLocation;
+    }
+
+    public void setToLocation(Location toLocation) {
+        this.toLocation = toLocation;
+    }
+
+    public Location getFromLocation() {
+        return fromLocation;
+    }
+
+    public void setFromLocation(Location fromLocation) {
+        this.fromLocation = fromLocation;
+    }
+
 
 }
