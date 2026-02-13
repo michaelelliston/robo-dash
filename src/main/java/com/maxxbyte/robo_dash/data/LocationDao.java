@@ -37,7 +37,7 @@ public class LocationDao extends DaoBase {
     }
 
     public Location getLocationById(int id) {
-        String sql = "SELECT * FROM delivery_locations WHERE id = ?;";
+        String sql = "SELECT * FROM delivery_locations WHERE location_id = ?;";
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
