@@ -10,7 +10,7 @@ public class Path {
 
     public Path() {}
 
-    public Path(int pathId, int fromLocationId, int toLocationId, int distance, PathType pathType,  Location fromLocation, Location toLocation) {
+    public Path(int pathId, int fromLocationId, int toLocationId, int distance, PathType pathType) {
         this.pathId = pathId;
         this.fromLocationId = fromLocationId;
         this.toLocationId = toLocationId;
