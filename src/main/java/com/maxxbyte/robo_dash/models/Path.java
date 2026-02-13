@@ -7,8 +7,6 @@ public class Path {
     int toLocationId;
     int distance; // measured in meters
     PathType pathType;
-    Location fromLocation;
-    Location toLocation;
 
     public Path() {}
 
@@ -18,8 +16,6 @@ public class Path {
         this.toLocationId = toLocationId;
         this.distance = distance;
         this.pathType = pathType;
-        this.fromLocation = fromLocation;
-        this.toLocation = toLocation;
     }
 
     public int getId() {
@@ -62,19 +58,5 @@ public class Path {
         this.pathType = pathType;
     }
 
-    public Location getFromLocation() {
-        return fromLocation;
-    }
 
-    public void setFromLocation(Location fromLocation) {
-        this.fromLocation = fromLocation;
-    }
-
-    public Location getToLocation() {
-        return toLocation;
-    }
-
-    public void setToLocation(Location toLocation) {
-        this.toLocation = toLocation;
-    }
 }
