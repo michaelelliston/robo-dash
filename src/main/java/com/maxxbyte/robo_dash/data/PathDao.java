@@ -77,8 +77,6 @@ public class PathDao extends DaoBase{
         return null;
     }
 
-
-
     private Path mapRow(ResultSet row) throws SQLException
     {
         int pathId = row.getInt("path_id");
