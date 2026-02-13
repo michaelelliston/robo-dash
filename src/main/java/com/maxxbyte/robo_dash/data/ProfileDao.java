@@ -16,7 +16,7 @@ public class ProfileDao extends DaoBase{
 
     public Profile getById(int userId)
     {
-        String sql = "SELECT * FROM products WHERE user_id = ?";
+        String sql = "SELECT * FROM profiles WHERE user_id = ?";
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);
