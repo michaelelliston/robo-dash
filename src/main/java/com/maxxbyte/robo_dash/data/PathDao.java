@@ -33,6 +33,52 @@ public class PathDao extends DaoBase{
         return null;
     }
 
+    public Path getByDistance(int distance)
+    {
+        String sql = "SELECT * FROM products WHERE distance_meters = ?";
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, distance);
+
+            ResultSet row = statement.executeQuery();
+
+            if (row.next())
+            {
+                return mapRow(row);
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    public Path getByPathType(PathType pathType)
+    {
+        String sql = "SELECT * FROM products WHERE path_type = ?";
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, pathType.toString());
+
+            ResultSet row = statement.executeQuery();
+
+            if (row.next())
+            {
+                return mapRow(row);
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+
+
     private Path mapRow(ResultSet row) throws SQLException
     {
         int pathId = row.getInt("path_id");
