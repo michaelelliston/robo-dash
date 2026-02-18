@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PathDao extends DaoBase{
     public PathDao(DataSource dataSource) {super(dataSource);}
@@ -33,9 +35,10 @@ public class PathDao extends DaoBase{
         return null;
     }
 
-    public Path getByDistance(int distance)
+    public List<Path> getByDistance(int distance)
     {
         String sql = "SELECT * FROM paths WHERE distance_meters = ?";
+        List<Path> paths = new ArrayList<>();
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -43,21 +46,22 @@ public class PathDao extends DaoBase{
 
             ResultSet row = statement.executeQuery();
 
-            if (row.next())
+            while (row.next())
             {
-                return mapRow(row);
+                paths.add(mapRow(row));
             }
+            return paths;
         }
         catch (SQLException e)
         {
             throw new RuntimeException(e);
         }
-        return null;
     }
 
-    public Path getByPathType(PathType pathType)
+    public List<Path> getByPathType(PathType pathType)
     {
         String sql = "SELECT * FROM paths WHERE path_type = ?";
+        List<Path> paths = new ArrayList<>();
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -67,14 +71,14 @@ public class PathDao extends DaoBase{
 
             if (row.next())
             {
-                return mapRow(row);
+                paths.add(mapRow(row));
             }
+            return paths;
         }
         catch (SQLException e)
         {
             throw new RuntimeException(e);
         }
-        return null;
     }
 
     private Path mapRow(ResultSet row) throws SQLException
