@@ -13,9 +13,30 @@ import java.util.List;
 public class PathDao extends DaoBase{
     public PathDao(DataSource dataSource) {super(dataSource);}
 
+    public List<Path> getAllPaths()
+    {
+        String sql = "SELECT * FROM paths;";
+        List<Path> paths = new ArrayList<>();
+        try (Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);)
+        {
+            ResultSet row = preparedStatement.executeQuery();
+
+            while (row.next())
+            {
+                paths.add(mapRow(row));
+            }
+            return paths;
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
     public Path getById(int pathId)
     {
-        String sql = "SELECT * FROM paths WHERE path_id = ?";
+        String sql = "SELECT * FROM paths WHERE path_id = ?;";
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -37,7 +58,7 @@ public class PathDao extends DaoBase{
 
     public List<Path> getByDistance(int distance)
     {
-        String sql = "SELECT * FROM paths WHERE distance_meters = ?";
+        String sql = "SELECT * FROM paths WHERE distance_meters = ?;";
         List<Path> paths = new ArrayList<>();
         try (Connection connection = getConnection())
         {
@@ -60,7 +81,7 @@ public class PathDao extends DaoBase{
 
     public List<Path> getByPathType(PathType pathType)
     {
-        String sql = "SELECT * FROM paths WHERE path_type = ?";
+        String sql = "SELECT * FROM paths WHERE path_type = ?;";
         List<Path> paths = new ArrayList<>();
         try (Connection connection = getConnection())
         {
