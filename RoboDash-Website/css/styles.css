@@ -10828,3 +10828,8 @@ textarea.form-control-lg {
   height: 180px;
   object-fit: cover;
 }
+
+.cart-img {
+    width: 300px;
+    height: auto;
+}
