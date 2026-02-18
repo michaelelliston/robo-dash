@@ -35,7 +35,7 @@ public class PathDao extends DaoBase{
 
     public Path getByDistance(int distance)
     {
-        String sql = "SELECT * FROM products WHERE distance_meters = ?";
+        String sql = "SELECT * FROM paths WHERE distance_meters = ?";
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -57,7 +57,7 @@ public class PathDao extends DaoBase{
 
     public Path getByPathType(PathType pathType)
     {
-        String sql = "SELECT * FROM products WHERE path_type = ?";
+        String sql = "SELECT * FROM paths WHERE path_type = ?";
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);
