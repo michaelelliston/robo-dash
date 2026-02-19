@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ProductDao extends DaoBase {
@@ -33,6 +35,57 @@ public class ProductDao extends DaoBase {
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    public List<Product> getAll()
+    {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT * FROM products";
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            ResultSet row = statement.executeQuery();
+
+            while (row.next())
+            {
+                Product p = mapRow(row);
+                products.add(p);
+            }
+            return products;
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Product> listByCategoryId(int categoryId)
+    {
+        List<Product> products = new ArrayList<>();
+
+        String sql = "SELECT * FROM products " +
+                " WHERE category_id = ? ";
+
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, categoryId);
+
+            ResultSet row = statement.executeQuery();
+
+            while (row.next())
+            {
+                Product product = mapRow(row);
+                products.add(product);
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+        return products;
     }
 
     private Product mapRow(ResultSet row) throws SQLException
