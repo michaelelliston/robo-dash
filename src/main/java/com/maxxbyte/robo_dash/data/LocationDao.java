@@ -55,6 +55,30 @@ public class LocationDao extends DaoBase {
         return null;
     }
 
+    public List<Location> getLocationsByType(LocationType type) {
+        String sql = "SELECT * FROM delivery_locations WHERE location_type = ?;";
+        List<Location> locations = new ArrayList<>();
+        String typeString = String.valueOf(type);
+
+        try (Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, typeString);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Location location = mapRow(resultSet);
+                    locations.add(location);
+                }
+            }
+            return locations;
+
+        } catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+        }
+        return null;
+    }
+
     private Location mapRow(ResultSet row) throws SQLException {
         int id = row.getInt("location_id");
         String name = row.getString("building_name");
