@@ -85,8 +85,8 @@ public class LocationDao extends DaoBase {
         String name = row.getString("building_name");
         String locationString = row.getString("location_type");
         LocationType locationType = LocationType.valueOf(locationString.toUpperCase());
-        long latitude = row.getLong("latitude");
-        long longitude = row.getLong("longitude");
+        double latitude = row.getDouble("latitude");
+        double longitude = row.getDouble("longitude");
 
         return new Location(id, name, locationType, latitude, longitude);
     }
