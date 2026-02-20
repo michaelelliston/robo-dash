@@ -54,7 +54,7 @@ public class LocationsController {
         }
     }
 
-    @GetMapping("{locationType}")
+    @GetMapping("type/{locationType}")
     @PreAuthorize("permitAll()")
     @ResponseStatus(value = HttpStatus.OK)
     public List<Location> getLocationsByLocationType(@PathVariable String locationType) {
