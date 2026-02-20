@@ -15,7 +15,7 @@
 </head>
 <body>
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="#!">RoboDash</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -25,6 +25,9 @@
                 <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="../pages/cart.html">Cart</a></li>
                 <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pages/order-history.html">Order History</a></li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -36,7 +39,11 @@
                 </li>
             </ul>
             <form class="d-flex">
-                <button class="btn btn-outline-dark" type="submit">
+                <button
+                        id="cartBtn"
+                        class="btn btn-outline-dark"
+                        type="button"
+                >
                     <i class="bi-cart-fill me-1"></i>
                     Cart
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
@@ -51,11 +58,12 @@
         <div class="text-center text-white">
             <h1 class="display-4 fw-bolder">Cart</h1>
             <p class="lead fw-normal text-white-50 mb-0">Let's take a look at what's inside</p>
+            <img src="../images/ShoppingCart_Image.png" alt="Shopping Cart" class="cart-img">
         </div>
     </div>
 </header>
 <!-- Section-->
-<section class="py-5">
+<section class="py-5 bg-white">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></div>
     </div>
