@@ -31,9 +31,10 @@ public class LocationDao extends DaoBase {
             }
             return locations;
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("SQLException: " + e.getMessage());
         }
-        return null;
+        return locations;
     }
 
     public Location getLocationById(int id) {
@@ -83,7 +84,7 @@ public class LocationDao extends DaoBase {
         int id = row.getInt("location_id");
         String name = row.getString("building_name");
         String locationString = row.getString("location_type");
-        LocationType locationType = LocationType.valueOf(locationString);
+        LocationType locationType = LocationType.valueOf(locationString.toUpperCase());
         long latitude = row.getLong("latitude");
         long longitude = row.getLong("longitude");
 

@@ -61,7 +61,7 @@ public class LocationsController {
         try {
             switch (locationType) {
                 case "dropoff" -> {
-                    List<Location> locations = locationDao.getLocationsByType(LocationType.DROP_OFF);
+                    List<Location> locations = locationDao.getLocationsByType(LocationType.DROPOFF);
                     if (locations.isEmpty()) {
                         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
                     }
