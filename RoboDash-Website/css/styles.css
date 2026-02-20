@@ -10872,3 +10872,27 @@ textarea.form-control-lg {
     width: 300px;
     height: auto;
 }
+:root {
+    --rd-primary: #3B82B5;
+    --rd-deep: #2C6E99;
+    --rd-accent: #00C2FF;
+    --rd-light: #F4F7FA;
+}
+
+.btn-primary {
+    background-color: var(--rd-primary);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--rd-deep);
+}
+
+.card {
+    border-radius: 12px;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
