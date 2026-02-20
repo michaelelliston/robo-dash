@@ -59,22 +59,13 @@ public class LocationsController {
     @ResponseStatus(value = HttpStatus.OK)
     public List<Location> getLocationsByLocationType(@PathVariable String locationType) {
         try {
-            switch (locationType) {
-                case "dropoff" -> {
-                    List<Location> locations = locationDao.getLocationsByType(LocationType.DROPOFF);
-                    if (locations.isEmpty()) {
-                        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-                    }
-                    return locations;
-                }
-                case "intersection" -> {
-                    List<Location> locations = locationDao.getLocationsByType(LocationType.INTERSECTION);
-                    if (locations.isEmpty()) {
-                        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-                    }
-                    return locations;
-                }
-            } throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+
+            List<Location> locations = locationDao.getLocationsByType(locationType);
+            if (locations.isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
+            return locations;
+
         } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Server error");
         }
