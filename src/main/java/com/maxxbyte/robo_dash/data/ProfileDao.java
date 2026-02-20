@@ -1,15 +1,40 @@
 package com.maxxbyte.robo_dash.data;
 
+import com.maxxbyte.robo_dash.models.Product;
 import com.maxxbyte.robo_dash.models.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Component
 public class ProfileDao extends DaoBase{
     public ProfileDao(DataSource dataSource) {super(dataSource);}
+
+    public Profile getById(int userId)
+    {
+        String sql = "SELECT * FROM profiles WHERE user_id = ?";
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, userId);
+
+            ResultSet row = statement.executeQuery();
+
+            if (row.next())
+            {
+                return mapRow(row);
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 
     private Profile mapRow(ResultSet row) throws SQLException
     {

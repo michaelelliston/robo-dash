@@ -1,19 +1,44 @@
 package com.maxxbyte.robo_dash.data;
 
 import com.maxxbyte.robo_dash.models.*;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+@Component
 public class PathDao extends DaoBase{
     public PathDao(DataSource dataSource) {super(dataSource);}
 
+    public List<Path> getAllPaths()
+    {
+        String sql = "SELECT * FROM paths;";
+        List<Path> paths = new ArrayList<>();
+        try (Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);)
+        {
+            ResultSet row = preparedStatement.executeQuery();
+
+            while (row.next())
+            {
+                paths.add(mapRow(row));
+            }
+            return paths;
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
     public Path getById(int pathId)
     {
-        String sql = "SELECT * FROM paths WHERE path_id = ?";
+        String sql = "SELECT * FROM paths WHERE path_id = ?;";
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -31,6 +56,52 @@ public class PathDao extends DaoBase{
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    public List<Path> getByDistance(int distance)
+    {
+        String sql = "SELECT * FROM paths WHERE distance_meters = ?;";
+        List<Path> paths = new ArrayList<>();
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, distance);
+
+            ResultSet row = statement.executeQuery();
+
+            while (row.next())
+            {
+                paths.add(mapRow(row));
+            }
+            return paths;
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Path> getByPathType(PathType pathType)
+    {
+        String sql = "SELECT * FROM paths WHERE path_type = ?;";
+        List<Path> paths = new ArrayList<>();
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, pathType.toString());
+
+            ResultSet row = statement.executeQuery();
+
+            if (row.next())
+            {
+                paths.add(mapRow(row));
+            }
+            return paths;
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
     private Path mapRow(ResultSet row) throws SQLException

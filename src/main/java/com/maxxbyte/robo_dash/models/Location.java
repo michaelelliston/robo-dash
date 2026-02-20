@@ -7,12 +7,12 @@ public class Location {
     int locationId;
     String name;
     LocationType type;
-    long latitude;
-    long longitude;
+    double latitude;
+    double longitude;
 
     public Location() {}
 
-    public Location(int locationId, String name, LocationType type, long latitude, long longitude) {
+    public Location(int locationId, String name, LocationType type, double latitude, double longitude) {
         this.locationId = locationId;
         this.name = name;
         this.type = type;
@@ -24,7 +24,7 @@ public class Location {
         return locationId;
     }
 
-    public void setId(int locationId) {
+    public void setLocationId(int locationId) {
         this.locationId = locationId;
     }
 
@@ -44,19 +44,19 @@ public class Location {
         this.type = type;
     }
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(long latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(long longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
