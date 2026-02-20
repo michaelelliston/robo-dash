@@ -1,6 +1,7 @@
 package com.maxxbyte.robo_dash.data;
 
 import com.maxxbyte.robo_dash.models.*;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class PathDao extends DaoBase{
     public PathDao(DataSource dataSource) {super(dataSource);}
 

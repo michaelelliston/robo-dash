@@ -2,6 +2,7 @@ package com.maxxbyte.robo_dash.data;
 
 import com.maxxbyte.robo_dash.models.Category;
 import com.maxxbyte.robo_dash.models.Product;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CategoryDao extends DaoBase{
     public CategoryDao(DataSource dataSource) {super(dataSource);}
 
