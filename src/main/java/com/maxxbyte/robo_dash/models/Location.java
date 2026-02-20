@@ -24,7 +24,7 @@ public class Location {
         return locationId;
     }
 
-    public void setId(int locationId) {
+    public void setLocationId(int locationId) {
         this.locationId = locationId;
     }
 
