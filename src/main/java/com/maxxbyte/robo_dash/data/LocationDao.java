@@ -56,10 +56,9 @@ public class LocationDao extends DaoBase {
         return null;
     }
 
-    public List<Location> getLocationsByType(LocationType type) {
+    public List<Location> getLocationsByType(String typeString) {
         String sql = "SELECT * FROM delivery_locations WHERE location_type = ?;";
         List<Location> locations = new ArrayList<>();
-        String typeString = String.valueOf(type);
 
         try (Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
