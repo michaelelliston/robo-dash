@@ -26,7 +26,8 @@ public class CategoriesController {
     }
 
     @GetMapping("")
-    @PreAuthorize("permitAll")
+    @PreAuthorize("permitAll()")
+    @ResponseStatus(value = HttpStatus.OK)
     public List<Category> getAllCategories() {
 
         return categoryDao.getAll();
