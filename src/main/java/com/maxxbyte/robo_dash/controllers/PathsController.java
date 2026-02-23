@@ -36,4 +36,20 @@ public class PathsController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Server error");
         }
     }
+
+    @GetMapping("{id}")
+    @PreAuthorize("permitAll()")
+    @ResponseStatus(value = HttpStatus.OK)
+    public Path getPathById(@PathVariable int id) {
+        try {
+            Path path = pathDao.getById(id);
+
+            if (path == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
+            return path;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Server error");
+        }
+    }
 }
