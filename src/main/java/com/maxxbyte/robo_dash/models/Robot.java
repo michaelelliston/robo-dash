@@ -7,7 +7,6 @@ public class Robot {
     //TODO: implement battery drain based on meters traveled
     private int id;
     private int batteryLevel; // Percentage of battery
-    private SurfaceType currentSpeed;
     private RobotStatus status;
     private boolean turnSignal;
     private NavigationService navigationService;
@@ -18,12 +17,12 @@ public class Robot {
 
     public Robot() {}
 
-    public Robot(int id) {
+    public Robot(int id, NavigationService navigationService) {
         this.id = id;
         this.batteryLevel = 100;
         this.status = RobotStatus.IDLE;
         this.turnSignal = false;
-        //this.homeLocation = LocationDao.getLocationById(61);
+        this.homeLocation = navigationService.getLocationById(61);
     }
 
     //TODO: implement ability to obtain customer location via their ID, map a route, and then start the delivery.
@@ -32,6 +31,14 @@ public class Robot {
         //status = RobotStatus.DELIVERING;
         //currentRoute = mapRoute(getCustomerLocation(customerId), currentLocation);
     //}
+
+    //TODO: Currently using a fixed destination location for testing
+    public void assignRoute() {
+        //Location destination = navigationService.getLocationById(currentOrder.getDeliveryLocationId());
+        Location destination = navigationService.getLocationById(29);
+        currentRoute = navigationService.calculateRoute(homeLocation, destination);
+        System.out.println(currentRoute);
+    }
 
     public void chargeBattery() {
         if (batteryLevel < 100) {
@@ -63,19 +70,12 @@ public class Robot {
         this.id = id;
     }
 
-    public SurfaceType getCurrentSpeed() {
-        return currentSpeed;
-    }
-
-    public void setCurrentSpeed(SurfaceType currentSpeed) {
-        this.currentSpeed = currentSpeed;
-    }
-
     // Parameters are assumed, use as necessary.
 
     public void setBatteryLevel(int batteryLevel) {
         this.batteryLevel = batteryLevel;
     }
+
     public Location getCurrentLocation() {
         return this.currentLocation;
     }
