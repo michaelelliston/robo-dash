@@ -5,9 +5,12 @@ import com.maxxbyte.robo_dash.data.PathDao;
 import com.maxxbyte.robo_dash.models.Location;
 import com.maxxbyte.robo_dash.models.Path;
 import com.maxxbyte.robo_dash.models.Route;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Component
 public class NavigationService {
 
     private List<Location> locationList;
@@ -16,9 +19,7 @@ public class NavigationService {
     private PathDao pathDao;
     private LocationDao locationDao;
 
-    public NavigationService(List<Location> locationList, List<Path> pathList, PathDao pathDao, LocationDao locationDao) {
-        this.locationList = locationList;
-        this.pathList = pathList;
+    public NavigationService(PathDao pathDao, LocationDao locationDao) {
         this.pathDao = pathDao;
         this.locationDao = locationDao;
     }
@@ -105,5 +106,9 @@ public class NavigationService {
 
         Collections.reverse(routePaths);
         return new Route(startLocation, destination, new ArrayList<>(routePaths));
+    }
+
+    public Location getLocationById(int id) {
+        return locationDao.getLocationById(id);
     }
 }
