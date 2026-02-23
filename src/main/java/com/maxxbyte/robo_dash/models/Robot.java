@@ -32,8 +32,10 @@ public class Robot {
         //currentRoute = mapRoute(getCustomerLocation(customerId), currentLocation);
     //}
 
+    //TODO: Currently using a fixed destination location for testing
     public void assignRoute() {
-        Location destination = navigationService.getLocationById(currentOrder.getDeliveryLocationId());
+        //Location destination = navigationService.getLocationById(currentOrder.getDeliveryLocationId());
+        Location destination = navigationService.getLocationById(29);
         currentRoute = navigationService.calculateRoute(homeLocation, destination);
         System.out.println(currentRoute);
     }
