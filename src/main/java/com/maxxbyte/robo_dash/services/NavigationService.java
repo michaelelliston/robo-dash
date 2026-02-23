@@ -15,21 +15,18 @@ public class NavigationService {
 
     private List<Location> locationList;
     private List<Path> pathList;
-    private Map<Location, List<Path>> pathMap;
+    private Map<Location, List<Path>> pathMap = new HashMap<>();
     private PathDao pathDao;
     private LocationDao locationDao;
 
     public NavigationService(PathDao pathDao, LocationDao locationDao) {
         this.pathDao = pathDao;
         this.locationDao = locationDao;
+        initializeMap();
     }
 
     // Populates an Adjacency List from Database
     public void initializeMap() {
-
-        locationList.clear();
-        pathList.clear();
-        pathMap.clear();
 
         locationList = locationDao.getAllLocations();
         pathList = pathDao.getAllPaths();
