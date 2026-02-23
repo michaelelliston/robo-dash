@@ -1,5 +1,7 @@
 package com.maxxbyte.robo_dash.services;
 
+import com.maxxbyte.robo_dash.data.LocationDao;
+import com.maxxbyte.robo_dash.data.PathDao;
 import com.maxxbyte.robo_dash.models.Location;
 import com.maxxbyte.robo_dash.models.Path;
 import com.maxxbyte.robo_dash.models.Route;
@@ -8,24 +10,35 @@ import java.util.*;
 
 public class NavigationService {
 
-    private final List<Location> locationList;
-    private final List<Path> pathList;
+    private List<Location> locationList;
+    private List<Path> pathList;
     private Map<Location, List<Path>> pathMap;
+    private PathDao pathDao;
+    private LocationDao locationDao;
 
-    public NavigationService(List<Location> locationList, List<Path> pathList) {
+    public NavigationService(List<Location> locationList, List<Path> pathList, PathDao pathDao, LocationDao locationDao) {
         this.locationList = locationList;
         this.pathList = pathList;
+        this.pathDao = pathDao;
+        this.locationDao = locationDao;
     }
 
     // Populates an Adjacency List from Database
     public void initializeMap() {
+
+        locationList.clear();
+        pathList.clear();
+        pathMap.clear();
+
+        locationList = locationDao.getAllLocations();
+        pathList = pathDao.getAllPaths();
 
         for (Location location : locationList) {
             pathMap.put(location, new ArrayList<>());
         }
 
         for (Path path : pathList) {
-            Location fromLocation = path.getFromLocation();
+            Location fromLocation = locationDao.getLocationById(path.getFromLocationId());
             if (pathMap.containsKey(fromLocation)) {
                 pathMap.get(fromLocation).add(path);
             }
@@ -60,7 +73,7 @@ public class NavigationService {
             }
 
             for (Path path : pathMap.get(currentLocation)) {
-                Location neighborLocation = path.getToLocation();
+                Location neighborLocation = locationDao.getLocationById(path.getFromLocationId());
                 if (visited.contains(neighborLocation)) {
                     continue;
                 }
@@ -87,7 +100,7 @@ public class NavigationService {
             }
 
             routePaths.add(path);
-            currentLocation = path.getToLocation();
+            currentLocation = locationDao.getLocationById(path.getToLocationId());
         }
 
         Collections.reverse(routePaths);
