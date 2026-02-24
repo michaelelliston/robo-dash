@@ -1,7 +1,10 @@
 package com.maxxbyte.robo_dash.models;
 
 import com.maxxbyte.robo_dash.services.NavigationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Robot {
 
     //TODO: implement battery drain based on meters traveled
@@ -17,11 +20,12 @@ public class Robot {
 
     public Robot() {}
 
-    public Robot(int id, NavigationService navigationService) {
-        this.id = id;
+    @Autowired
+    public Robot(NavigationService navigationService) {
         this.batteryLevel = 100;
         this.status = RobotStatus.IDLE;
         this.turnSignal = false;
+        this.navigationService = navigationService;
         this.homeLocation = navigationService.getLocationById(61);
     }
 
@@ -33,11 +37,12 @@ public class Robot {
     //}
 
     //TODO: Currently using a fixed destination location for testing
-    public void assignRoute() {
+    public Route assignRoute() {
         //Location destination = navigationService.getLocationById(currentOrder.getDeliveryLocationId());
         Location destination = navigationService.getLocationById(29);
         currentRoute = navigationService.calculateRoute(homeLocation, destination);
         System.out.println(currentRoute);
+        return currentRoute;
     }
 
     public void chargeBattery() {

@@ -58,4 +58,9 @@ public class Path {
         this.pathType = pathType;
     }
 
+    @Override
+    public String toString() {
+        return "From Location: " + fromLocationId + ", To Location: " + toLocationId + ", Distance: " + distance;
+    }
+
 }

@@ -12,17 +12,11 @@ public class Route {
 
     public Route() {}
 
-    public Route(Location startingLocation, Location destination, List<Path> paths, int totalDistance) {
-        this.startingLocation = startingLocation;
-        this.destination = destination;
-        this.paths = paths;
-        this.totalDistance = totalDistance;
-    }
-
     public Route(Location startLocation, Location destination, ArrayList<Path> paths) {
         this.startingLocation = startLocation;
         this.destination = destination;
         this.paths = paths;
+        this.totalDistance = calculateTotalDistance();
     }
 
     public Location getStartingLocation() {
@@ -55,5 +49,13 @@ public class Route {
 
     public void setTotalDistance(int totalDistance) {
         this.totalDistance = totalDistance;
+    }
+
+    public int calculateTotalDistance() {
+        int totalDistance = 0;
+        for (Path path : paths) {
+            totalDistance += path.getDistance();
+        }
+        return totalDistance;
     }
 }
