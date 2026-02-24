@@ -1,96 +1,116 @@
 package com.maxxbyte.robo_dash.services;
 
+import com.maxxbyte.robo_dash.data.LocationDao;
+import com.maxxbyte.robo_dash.data.PathDao;
 import com.maxxbyte.robo_dash.models.Location;
 import com.maxxbyte.robo_dash.models.Path;
 import com.maxxbyte.robo_dash.models.Route;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class NavigationService {
 
-    private final List<Location> locationList;
-    private final List<Path> pathList;
-    private Map<Location, List<Path>> pathMap;
+    private List<Location> locationList;
+    private List<Path> pathList;
+    private Map<Integer, List<Path>> pathMap = new HashMap<>();
+    private PathDao pathDao;
+    private LocationDao locationDao;
 
-    public NavigationService(List<Location> locationList, List<Path> pathList) {
-        this.locationList = locationList;
-        this.pathList = pathList;
+    public NavigationService(PathDao pathDao, LocationDao locationDao) {
+        this.pathDao = pathDao;
+        this.locationDao = locationDao;
     }
 
     // Populates an Adjacency List from Database
+    @PostConstruct
     public void initializeMap() {
 
+        locationList = locationDao.getAllLocations();
+        pathList = pathDao.getAllPaths();
+
         for (Location location : locationList) {
-            pathMap.put(location, new ArrayList<>());
+            pathMap.put(location.getLocationId(), new ArrayList<>());
         }
 
         for (Path path : pathList) {
-            Location fromLocation = path.getFromLocation();
-            if (pathMap.containsKey(fromLocation)) {
-                pathMap.get(fromLocation).add(path);
+            int fromLocationId = path.getFromLocationId();
+            if (pathMap.containsKey(fromLocationId)) {
+                pathMap.get(fromLocationId).add(path);
             }
         }
+        System.out.println("Map initialized");
+        System.out.println("Neighbors of 61: " + pathMap.get(61));
     }
 
     public Route calculateRoute(Location startLocation, Location destination) {
-        Map<Location, Double> distances = new HashMap<>();
-        Map<Location, Path> previousPath = new HashMap<>();
-        Set<Location> visited = new HashSet<>();
 
-        PriorityQueue<Location> queue = new PriorityQueue<>(
-                Comparator.comparingDouble(distances::get)
-        );
+        int startId = startLocation.getLocationId();
+        int destId = destination.getLocationId();
 
-        for (Location location : pathMap.keySet()) {
-            distances.put(location, Double.POSITIVE_INFINITY);
+        Map<Integer, Double> distances = new HashMap<>();
+        Map<Integer, Path> previousPath = new HashMap<>();
+        Set<Integer> visited = new HashSet<>();
+
+        PriorityQueue<Integer> queue =
+                new PriorityQueue<>(Comparator.comparingDouble(distances::get));
+
+        for (Integer locationId : pathMap.keySet()) {
+            distances.put(locationId, Double.POSITIVE_INFINITY);
         }
 
-        distances.put(startLocation, 0.0);
-        queue.add(startLocation);
+        distances.put(startId, 0.0);
+        queue.add(startId);
 
         while (!queue.isEmpty()) {
+            int currentId = queue.poll();
 
-            Location currentLocation = queue.poll();
-            if (visited.contains(currentLocation)) {
-                continue;
-            }
-            visited.add(currentLocation);
-            if (currentLocation.equals(destination)) {
-                break;
-            }
+            if (visited.contains(currentId)) continue;
+            visited.add(currentId);
 
-            for (Path path : pathMap.get(currentLocation)) {
-                Location neighborLocation = path.getToLocation();
-                if (visited.contains(neighborLocation)) {
-                    continue;
-                }
-                double newDistance = distances.get(currentLocation) + path.getDistance();
+            if (currentId == destId) break;
 
-                if (newDistance < distances.get(neighborLocation)) {
-                    distances.put(neighborLocation, newDistance);
-                    previousPath.put(neighborLocation, path);
-                    queue.add(neighborLocation);
+            for (Path path : pathMap.getOrDefault(currentId, new ArrayList<>())) {
+                int neighborId = path.getToLocationId();
+
+                if (visited.contains(neighborId)) continue;
+
+                double newDistance = distances.get(currentId) + path.getDistance();
+
+                if (newDistance < distances.getOrDefault(neighborId, Double.POSITIVE_INFINITY)) {
+                    distances.put(neighborId, newDistance);
+                    previousPath.put(neighborId, path);
+                    queue.add(neighborId);
                 }
             }
         }
+
         return reconstructRoute(startLocation, destination, previousPath);
     }
 
-    private Route reconstructRoute(Location startLocation, Location destination, Map<Location, Path> previousPath) {
+    private Route reconstructRoute(Location startLocation, Location destination, Map<Integer, Path> previousPath) {
         List<Path> routePaths = new ArrayList<>();
         Location currentLocation = destination;
-        while (currentLocation != startLocation) {
+        while (!currentLocation.equals(startLocation)) {
 
-            Path path = previousPath.get(currentLocation);
+            Path path = previousPath.get(currentLocation.getLocationId());
             if (path == null) {
                 return new Route(startLocation, destination, new ArrayList<>());
             }
 
             routePaths.add(path);
-            currentLocation = path.getToLocation();
+            currentLocation = locationDao.getLocationById(path.getFromLocationId());
         }
 
         Collections.reverse(routePaths);
         return new Route(startLocation, destination, new ArrayList<>(routePaths));
+    }
+
+    public Location getLocationById(int id) {
+        return locationDao.getLocationById(id);
     }
 }
