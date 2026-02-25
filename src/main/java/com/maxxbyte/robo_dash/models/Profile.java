@@ -1,7 +1,7 @@
 package com.maxxbyte.robo_dash.models;
 
 public class Profile {
-    private int userId;
+    private String keycloakId;
     private String firstName = "";
     private String lastName = "";
     private String phone = "";
@@ -14,8 +14,8 @@ public class Profile {
     public Profile() {
     }
 
-    public Profile(int userId, String firstName, String lastName, String phone, String email, String address, String city, String state, String zip) {
-        this.userId = userId;
+    public Profile(String keycloakId, String firstName, String lastName, String phone, String email, String address, String city, String state, String zip) {
+        this.keycloakId = keycloakId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -26,12 +26,12 @@ public class Profile {
         this.zip = zip;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getKeycloakId() {
+        return keycloakId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setKeycloakId(String keycloakId) {
+        this.keycloakId = keycloakId;
     }
 
     public String getFirstName() {
