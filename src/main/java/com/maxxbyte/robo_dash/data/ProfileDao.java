@@ -38,7 +38,7 @@ public class ProfileDao extends DaoBase{
 
     private Profile mapRow(ResultSet row) throws SQLException
     {
-        int userId = row.getInt("user_id");
+        String keycloakId = row.getString("user_id");
         String firstName = row.getString("first_name");
         String lastName = row.getString("last_name");
         String phone = row.getString("phone");
@@ -48,6 +48,6 @@ public class ProfileDao extends DaoBase{
         String state = row.getString("state");
         String zip = row.getString("zip");
 
-        return new Profile(userId, firstName, lastName, phone, email, address, city, state, zip);
+        return new Profile(keycloakId, firstName, lastName, phone, email, address, city, state, zip);
     }
 }
