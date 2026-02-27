@@ -23,7 +23,7 @@ public class OrderController {
 
     @GetMapping("{id}")
     @PreAuthorize("permitAll()")
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @ResponseStatus(value = HttpStatus.OK)
     public Route assignRoute(@PathVariable int id) {
         return robot.assignRoute(id);
     }
