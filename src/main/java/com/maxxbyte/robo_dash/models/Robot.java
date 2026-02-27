@@ -29,16 +29,7 @@ public class Robot {
         this.homeLocation = navigationService.getLocationById(61);
     }
 
-    //TODO: implement ability to obtain customer location via their ID, map a route, and then start the delivery.
-
-    //public void startDelivery(Route deliveryRoute) {
-        //status = RobotStatus.DELIVERING;
-        //currentRoute = mapRoute(getCustomerLocation(customerId), currentLocation);
-    //}
-
-    //TODO: Currently using a fixed destination location for testing
     public Route assignRoute(int locationId) {
-        //Location destination = navigationService.getLocationById(currentOrder.getDeliveryLocationId());
         Location destination = navigationService.getLocationById(locationId);
         currentRoute = navigationService.calculateRoute(homeLocation, destination);
         System.out.println(currentRoute);
@@ -74,8 +65,6 @@ public class Robot {
     public void setId(int id) {
         this.id = id;
     }
-
-    // Parameters are assumed, use as necessary.
 
     public void setBatteryLevel(int batteryLevel) {
         this.batteryLevel = batteryLevel;
