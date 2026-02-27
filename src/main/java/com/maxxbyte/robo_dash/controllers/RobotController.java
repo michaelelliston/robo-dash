@@ -25,7 +25,7 @@ public class RobotController {
     @PreAuthorize("permitAll()")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public Route assignRoute(@PathVariable int id) {
-        return robot.assignRoute();
+        return robot.assignRoute(id);
     }
 
 
