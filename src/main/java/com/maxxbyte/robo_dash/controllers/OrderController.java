@@ -9,23 +9,23 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("robot")
+@RequestMapping("order")
 @CrossOrigin
-public class RobotController {
+public class OrderController {
     private Robot robot;
     private LocationDao locationDao;
 
     @Autowired
-    public RobotController(Robot robot, LocationDao locationDao) {
+    public OrderController(Robot robot, LocationDao locationDao) {
         this.robot = robot;
         this.locationDao = locationDao;
     }
 
     @GetMapping("{id}")
     @PreAuthorize("permitAll()")
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @ResponseStatus(value = HttpStatus.OK)
     public Route assignRoute(@PathVariable int id) {
-        return robot.assignRoute();
+        return robot.assignRoute(id);
     }
 
 
