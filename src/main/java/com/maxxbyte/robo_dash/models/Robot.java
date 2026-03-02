@@ -32,7 +32,6 @@ public class Robot {
     public Route assignRoute(int locationId) {
         Location destination = navigationService.getLocationById(locationId);
         currentRoute = navigationService.calculateRoute(homeLocation, destination);
-        System.out.println(currentRoute);
         return currentRoute;
     }
 

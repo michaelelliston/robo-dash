@@ -43,8 +43,6 @@ public class NavigationService {
                 pathMap.get(fromLocationId).add(path);
             }
         }
-        System.out.println("Map initialized");
-        System.out.println("Neighbors of 61: " + pathMap.get(61));
     }
 
     public Route calculateRoute(Location startLocation, Location destination) {
