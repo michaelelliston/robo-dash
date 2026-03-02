@@ -1,7 +1,8 @@
 package com.maxxbyte.robo_dash.models;
 
-public class Profile {
-    private String keycloakId;
+public class Profile
+{
+    private int userId;
     private String firstName = "";
     private String lastName = "";
     private String phone = "";
@@ -11,11 +12,13 @@ public class Profile {
     private String state = "";
     private String zip = "";
 
-    public Profile() {
+    public Profile()
+    {
     }
 
-    public Profile(String keycloakId, String firstName, String lastName, String phone, String email, String address, String city, String state, String zip) {
-        this.keycloakId = keycloakId;
+    public Profile(int userId, String firstName, String lastName, String phone, String email, String address, String city, String state, String zip)
+    {
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -26,75 +29,93 @@ public class Profile {
         this.zip = zip;
     }
 
-    public String getKeycloakId() {
-        return keycloakId;
+    public int getUserId()
+    {
+        return userId;
     }
 
-    public void setKeycloakId(String keycloakId) {
-        this.keycloakId = keycloakId;
+    public void setUserId(int userId)
+    {
+        this.userId = userId;
     }
 
-    public String getFirstName() {
+    public String getFirstName()
+    {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName)
+    {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
+    public String getLastName()
+    {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(String lastName)
+    {
         this.lastName = lastName;
     }
 
-    public String getPhone() {
+    public String getPhone()
+    {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(String phone)
+    {
         this.phone = phone;
     }
 
-    public String getEmail() {
+    public String getEmail()
+    {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email)
+    {
         this.email = email;
     }
 
-    public String getAddress() {
+    public String getAddress()
+    {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(String address)
+    {
         this.address = address;
     }
 
-    public String getCity() {
+    public String getCity()
+    {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(String city)
+    {
         this.city = city;
     }
 
-    public String getState() {
+    public String getState()
+    {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(String state)
+    {
         this.state = state;
     }
 
-    public String getZip() {
+    public String getZip()
+    {
         return zip;
     }
 
-    public void setZip(String zip) {
+    public void setZip(String zip)
+    {
         this.zip = zip;
     }
 }
