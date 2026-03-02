@@ -1,6 +1,6 @@
 package com.maxxbyte.robo_dash.models.authentication;
 
-import jakarta.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 
 public class RegisterUserDto {
 

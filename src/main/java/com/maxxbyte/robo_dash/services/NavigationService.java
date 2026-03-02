@@ -5,7 +5,7 @@ import com.maxxbyte.robo_dash.data.PathDao;
 import com.maxxbyte.robo_dash.models.Location;
 import com.maxxbyte.robo_dash.models.Path;
 import com.maxxbyte.robo_dash.models.Route;
-import jakarta.annotation.PostConstruct;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
