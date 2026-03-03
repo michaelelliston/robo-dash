@@ -4,6 +4,7 @@ import com.maxxbyte.robo_dash.security.jwt.JWTConfigurer;
 import com.maxxbyte.robo_dash.security.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -69,6 +70,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .apply(securityConfigurerAdapter());
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userModelDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
 
     private JWTConfigurer securityConfigurerAdapter() {
