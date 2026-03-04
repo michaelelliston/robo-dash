@@ -1,6 +1,7 @@
 package com.maxxbyte.robo_dash.data;
 
 import com.maxxbyte.robo_dash.models.Order;
+import com.maxxbyte.robo_dash.models.OrderStatus;
 import com.maxxbyte.robo_dash.models.Profile;
 
 import javax.sql.DataSource;
@@ -44,6 +45,7 @@ public class OrderDao extends DaoBase{
         LocalDateTime orderDate = row.getTimestamp("order_date").toLocalDateTime();
         int locationId = row.getInt("location_id");
         double totalPrice = row.getDouble("total_price");
+        OrderStatus orderStatus = OrderStatus.valueOf(row.getString("status").toUpperCase());
 
         Order order = new Order();
         order.setOrderId(orderId);
@@ -51,6 +53,7 @@ public class OrderDao extends DaoBase{
         order.setOrderDate(orderDate);
         order.setDeliveryLocationId(locationId);
         order.setTotalPrice(totalPrice);
+        order.setStatus(orderStatus);
         return order;
 
     }
