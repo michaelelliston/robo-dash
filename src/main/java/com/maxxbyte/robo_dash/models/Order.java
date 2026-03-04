@@ -1,5 +1,6 @@
 package com.maxxbyte.robo_dash.models;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ public class Order {
     int userId;
     int deliveryLocationId;
     double totalPrice;
-
+    LocalDateTime orderDate;
     Map<Integer, OrderItem> items = new HashMap<>();
 
     public Map<Integer, OrderItem> getItems() {
@@ -49,5 +50,13 @@ public class Order {
 
     public int getDeliveryLocationId() {
         return deliveryLocationId;
+    }
+
+    public LocalDateTime getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
     }
 }
