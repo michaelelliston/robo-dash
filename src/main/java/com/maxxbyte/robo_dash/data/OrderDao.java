@@ -41,24 +41,25 @@ public class OrderDao extends DaoBase{
         return null;
     }
 
-    public Order getByUserId(int userId)
+    public List<Order> getByUserId(int userId)
     {
         String sql = "SELECT * FROM orders WHERE user_id = ?";
-        try (Connection connection = getConnection())
-        {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, userId);
+        List<Order> orders = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            ResultSet row = statement.executeQuery();
+            preparedStatement.setInt(1, userId);
 
-            if (row.next())
-            {
-                return mapRow(row);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Order order = mapRow(resultSet);
+                    orders.add(order);
+                }
             }
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException(e);
+            return orders;
+
+        } catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
         }
         return null;
     }
