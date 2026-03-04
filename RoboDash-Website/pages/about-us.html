@@ -12,20 +12,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../css/styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Google fonts-->
 </head>
 <body>
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#!">RoboDash</a>
+        <a class="navbar-brand fw-bold" href="about-us.html" style="color:#2C6E99;">RoboDash</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="../pages/cart.html">Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="../pages/cart.html">Cart</a></li>
                 <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
-                <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="about-us.html">About Us</a></li>
                 <li class="nav-item"><a class="nav-link" href="../pages/order-history.html">Order History</a></li>
 
                 <li class="nav-item dropdown">
@@ -53,12 +57,11 @@
     </div>
 </nav>
 <!-- Header-->
-<header class="bg-dark py-1">
-    <div class="container px-4 px-lg-5 my-1">
+<header class="rd-light py-5">
+    <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Cart</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Let's take a look at what's inside</p>
-            <img src="../images/ShoppingCart_Image.png" alt="Shopping Cart" class="cart-img">
+            <h1 class="display-4 fw-bolder rd-primary-text">About Us</h1>
+            <p class="lead text-muted mt-3">Learn more here</p>
         </div>
     </div>
 </header>
@@ -66,11 +69,33 @@
 <section class="py-5 bg-white">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></div>
+            <h2 class="display-6 fw-semibold rd-primary-text">What's RoboDash</h2>
+            <p class="lead fw-normal text-dark-50 mb-5">RoboDash is a next-gen delivery platform
+                built to make local delivery faster, safer, and more dependable. We combine robotics-enabled
+                delivery with smart routing and real-time tracking, so customers get what they need without the wait.
+            </p>
+
+            <h3 class="display-6 fw-semibold rd-primary-text">Our Mission</h3>
+            <p class="lead fw-normal text-dark-50 mb-5">To make delivery effortless by using smart technology and
+                reliable service, people can spend less time waiting and more time living.
+            </p>
+
+            <h3 class="display-6 fw-semibold rd-primary-text">Our Values</h3>
+        <ul>
+            <li class="lead fw-normal text-dark-50 mb-3">Speed with purpose faster routes, fewer delays</li>
+            <li class="lead fw-normal text-dark-50 mb-3">Safety first — secure handling and dependable drop-offs</li>
+            <li class="lead fw-normal text-dark-50 mb-3">Clear communication — live updates and easy support</li>
+            <li class="lead fw-normal text-dark-50 mb-5">Built for trust — consistent service, every time</li>
+        </ul>
+
+        <div class="text-center rd-primary-text">
+            <p class="lead fw-semibold text-dark-50 mb-0">Click. Dash. Done.</p>
+        </div>
     </div>
 </section>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
-    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; RoboDash 2026</p></div>
+    <div class="container"><p class="m-0 text-center text-light">Copyright &copy; RoboDash 2026</p></div>
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
