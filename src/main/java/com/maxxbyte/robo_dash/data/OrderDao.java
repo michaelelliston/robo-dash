@@ -45,7 +45,7 @@ public class OrderDao extends DaoBase{
         LocalDateTime orderDate = row.getTimestamp("order_date").toLocalDateTime();
         int locationId = row.getInt("location_id");
         double totalPrice = row.getDouble("total_price");
-        OrderStatus orderStatus = OrderStatus.valueOf(row.getString("status").toUpperCase());
+        OrderStatus orderStatus = OrderStatus.valueOf(row.getString("order_progress").toUpperCase());
 
         Order order = new Order();
         order.setOrderId(orderId);
