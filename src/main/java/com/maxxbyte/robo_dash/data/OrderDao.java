@@ -1,5 +1,6 @@
 package com.maxxbyte.robo_dash.data;
 
+import com.maxxbyte.robo_dash.models.Location;
 import com.maxxbyte.robo_dash.models.Order;
 import com.maxxbyte.robo_dash.models.OrderStatus;
 import com.maxxbyte.robo_dash.models.Profile;
@@ -10,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDao extends DaoBase{
     public OrderDao(DataSource dataSource) {
@@ -34,6 +37,51 @@ public class OrderDao extends DaoBase{
         catch (SQLException e)
         {
             throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    public Order getByUserId(int userId)
+    {
+        String sql = "SELECT * FROM orders WHERE user_id = ?";
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, userId);
+
+            ResultSet row = statement.executeQuery();
+
+            if (row.next())
+            {
+                return mapRow(row);
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    public List<Order> getByStatus(String statusString)
+    {
+        String sql = "SELECT * FROM orders WHERE order_progress = ?";
+        List<Order> orders = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, statusString);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Order order = mapRow(resultSet);
+                    orders.add(order);
+                }
+            }
+            return orders;
+
+        } catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
         }
         return null;
     }
