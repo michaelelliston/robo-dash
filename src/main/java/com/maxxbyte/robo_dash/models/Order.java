@@ -11,6 +11,7 @@ public class Order {
     double totalPrice;
     LocalDateTime orderDate;
     Map<Integer, OrderItem> items = new HashMap<>();
+    OrderStatus status;
 
     public Map<Integer, OrderItem> getItems() {
         return items;
@@ -59,4 +60,9 @@ public class Order {
     public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+    public void setStatus(OrderStatus status) {}
 }
