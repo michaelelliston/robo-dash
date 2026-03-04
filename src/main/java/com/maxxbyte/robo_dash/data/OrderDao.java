@@ -8,9 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class OrderDao extends DaoBase{
-    public OrderDao(DataSource dataSource) {super(dataSource);}
+    public OrderDao(DataSource dataSource) {
+        super(dataSource);
+    }
 
     public Order getById(int orderId)
     {
@@ -38,7 +41,17 @@ public class OrderDao extends DaoBase{
     {
         int orderId = row.getInt("order_id");
         int userId = row.getInt("user_id");
+        LocalDateTime orderDate = row.getTimestamp("order_date").toLocalDateTime();
+        int locationId = row.getInt("location_id");
+        double totalPrice = row.getInt("total_price");
 
-        return new Profile(userId, firstName, lastName, phone, email, address, city, state, zip);
+        Order order = new Order();
+        order.setOrderId(orderId);
+        order.setUserId(userId);
+        order.setOrderDate(orderDate);
+        order.setDeliveryLocationId(locationId);
+        order.setTotalPrice(totalPrice);
+        return order;
+
     }
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class Order {
 
+    int orderId;
     int userId;
     int deliveryLocationId;
     double totalPrice;
@@ -52,11 +53,21 @@ public class Order {
         return deliveryLocationId;
     }
 
+    public void setDeliveryLocationId(int deliveryLocationId) {}
+
     public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
     public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 }
