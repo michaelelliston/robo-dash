@@ -43,7 +43,7 @@ public class OrderDao extends DaoBase{
         int userId = row.getInt("user_id");
         LocalDateTime orderDate = row.getTimestamp("order_date").toLocalDateTime();
         int locationId = row.getInt("location_id");
-        double totalPrice = row.getInt("total_price");
+        double totalPrice = row.getDouble("total_price");
 
         Order order = new Order();
         order.setOrderId(orderId);
