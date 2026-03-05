@@ -20,7 +20,7 @@ public class OrderDao extends DaoBase{
 
     public Order create(Order order)
     {
-        String sql = "INSERT INTO orders (user_id, delivery_location_id, total_price, order_date, status) " +
+        String sql = "INSERT INTO orders (user_id, location_id, total_price, order_date, order_progress) " +
                 "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = getConnection())
@@ -31,7 +31,7 @@ public class OrderDao extends DaoBase{
             statement.setInt(2, order.getDeliveryLocationId());
             statement.setDouble(3, order.getTotal());
             statement.setTimestamp(4, Timestamp.valueOf(order.getOrderDate()));
-            statement.setString(5, order.getStatus().name());
+            statement.setString(5, order.getStatus().toString());
 
             statement.executeUpdate();
 

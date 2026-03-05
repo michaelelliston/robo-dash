@@ -34,12 +34,13 @@ public class OrderController {
         this.robot = robot;
     }
 
-    private String getCurrentUsername() {
-        Authentication authentication = SecurityContextHolder
+    private User getCurrentUser() {
+        String username = SecurityContextHolder
                 .getContext()
-                .getAuthentication();
+                .getAuthentication()
+                .getName();
 
-        return authentication.getName();
+        return userDao.getByUserName(username);
     }
 
     @PostMapping
@@ -47,10 +48,7 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     public Order createOrder(@RequestBody CreateOrderDto dto)
     {
-        String username = getCurrentUsername();
-
-        // get user
-        User user = userDao.getByUserName(username);
+        User user = getCurrentUser();
 
         Order order = new Order();
         order.setUserId(user.getId());
