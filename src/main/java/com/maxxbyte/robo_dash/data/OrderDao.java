@@ -4,6 +4,7 @@ import com.maxxbyte.robo_dash.models.Location;
 import com.maxxbyte.robo_dash.models.Order;
 import com.maxxbyte.robo_dash.models.OrderStatus;
 import com.maxxbyte.robo_dash.models.Profile;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class OrderDao extends DaoBase{
     public OrderDao(DataSource dataSource) {
         super(dataSource);
@@ -18,20 +20,27 @@ public class OrderDao extends DaoBase{
 
     public Order create(Order order)
     {
-        String sql = "INSERT INTO orders (order_id, user_id, order_date, location_id, total_price, order_progress) " +
-                " VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO orders (user_id, delivery_location_id, total_price, order_date, status) " +
+                "VALUES (?, ?, ?, ?, ?)";
 
-        try(Connection connection = getConnection())
+        try (Connection connection = getConnection())
         {
-            PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, order.getOrderId());
-            ps.setInt(2, order.getUserId());
-            ps.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setInt(4, order.getDeliveryLocationId());
-            ps.setDouble(5, order.getTotal());
-            ps.setString(6, String.valueOf(order.getStatus()));
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.executeUpdate();
+            statement.setInt(1, order.getUserId());
+            statement.setInt(2, order.getDeliveryLocationId());
+            statement.setDouble(3, order.getTotal());
+            statement.setTimestamp(4, Timestamp.valueOf(order.getOrderDate()));
+            statement.setString(5, order.getStatus().name());
+
+            statement.executeUpdate();
+
+            ResultSet keys = statement.getGeneratedKeys();
+
+            if (keys.next())
+            {
+                order.setOrderId(keys.getInt(1));
+            }
 
             return order;
         }
@@ -111,21 +120,34 @@ public class OrderDao extends DaoBase{
 
     private Order mapRow(ResultSet row) throws SQLException
     {
-        int orderId = row.getInt("order_id");
-        int userId = row.getInt("user_id");
-        LocalDateTime orderDate = row.getTimestamp("order_date").toLocalDateTime();
-        int locationId = row.getInt("location_id");
-        double totalPrice = row.getDouble("total_price");
-        OrderStatus orderStatus = OrderStatus.valueOf(row.getString("order_progress").toUpperCase());
-
         Order order = new Order();
-        order.setOrderId(orderId);
-        order.setUserId(userId);
-        order.setOrderDate(orderDate);
-        order.setDeliveryLocationId(locationId);
-        order.setTotalPrice(totalPrice);
-        order.setStatus(orderStatus);
-        return order;
 
+        order.setOrderId(row.getInt("order_id"));
+        order.setUserId(row.getInt("user_id"));
+        order.setDeliveryLocationId(row.getInt("location_id"));
+        order.setTotalPrice(row.getDouble("total_price"));
+        order.setOrderDate(row.getTimestamp("order_date").toLocalDateTime());
+        order.setStatus(OrderStatus.valueOf(row.getString("order_progress").toUpperCase()));
+
+        return order;
+    }
+
+    public void updateOrderStatus(int orderId, OrderStatus status)
+    {
+        String sql = "UPDATE orders SET status = ? WHERE order_id = ?";
+
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, status.name());
+            statement.setInt(2, orderId);
+
+            statement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 }

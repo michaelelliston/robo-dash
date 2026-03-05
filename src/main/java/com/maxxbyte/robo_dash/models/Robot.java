@@ -53,6 +53,10 @@ public class Robot {
         return this.currentOrder;
     }
 
+    public void setCurrentOrder(Order currentOrder) {
+        this.currentOrder = currentOrder;
+    }
+
     public int getId() {
         return this.id;
     }
