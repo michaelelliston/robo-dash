@@ -1,20 +1,25 @@
 package com.maxxbyte.robo_dash.models.dto;
 
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public class CreateOrderDto {
 
-    @NotNull
-    private Integer deliveryLocationId;
+    private int deliveryLocationId;
+    private List<CreateOrderItemDto> items;
 
-    public CreateOrderDto() {
-    }
-
-    public Integer getDeliveryLocationId() {
+    public int getDeliveryLocationId() {
         return deliveryLocationId;
     }
 
-    public void setDeliveryLocationId(Integer deliveryLocationId) {
+    public void setDeliveryLocationId(int deliveryLocationId) {
         this.deliveryLocationId = deliveryLocationId;
+    }
+
+    public List<CreateOrderItemDto> getItems() {
+        return items;
+    }
+
+    public void setItems(List<CreateOrderItemDto> items) {
+        this.items = items;
     }
 }

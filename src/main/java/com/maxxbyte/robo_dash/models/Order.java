@@ -6,12 +6,17 @@ import java.util.Map;
 
 public class Order {
 
+    int orderId;
     int userId;
     int deliveryLocationId;
     double totalPrice;
     LocalDateTime orderDate;
     Map<Integer, OrderItem> items = new HashMap<>();
     OrderStatus status;
+
+    public Order() {
+        this.status = OrderStatus.IN_PROGRESS;
+    }
 
     public Map<Integer, OrderItem> getItems() {
         return items;
@@ -53,6 +58,8 @@ public class Order {
         return deliveryLocationId;
     }
 
+    public void setDeliveryLocationId(int deliveryLocationId) {this.deliveryLocationId = deliveryLocationId;}
+
     public LocalDateTime getOrderDate() {
         return orderDate;
     }
@@ -65,4 +72,11 @@ public class Order {
         return status;
     }
     public void setStatus(OrderStatus status) {}
+
+    public int getOrderId() {
+        return orderId;
+    }
+    public void setOrderId(int orderId) {}
+
+
 }
