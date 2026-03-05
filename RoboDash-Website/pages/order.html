@@ -50,36 +50,42 @@
 <section class="py-5">
     <div class="container">
 
-        <div class="row g-3 align-items-end mb-4">
-            <div class="col-12 col-md-4">
-                <label class="form-label">Diet</label>
-                <select id="dietFilter" class="form-select">
-                    <option value="all" selected>All</option>
-                    <option value="vegan">Vegan</option>
-                    <option value="vegetarian">Vegetarian</option>
-                    <option value="non-vegetarian">Non-Vegetarian</option>
-                </select>
-            </div>
+        <div class="card shadow-sm border-0 rounded-4 p-4 mb-5" style="background-color:#F4F7FA;">
+            <div class="row g-3 align-items-center">
 
-            <div class="col-12 col-md-4">
-                <label class="form-label">Price range</label>
-                <select id="priceFilter" class="form-select">
-                    <option value="all" selected>All</option>
-                    <option value="0-10">$0–$10</option>
-                    <option value="10-15">$10–$15</option>
-                    <option value="15-9999">$15+</option>
-                </select>
-            </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Diet</label>
+                    <select class="form-select rounded-pill">
+                        <option>All</option>
+                        <option>Vegan</option>
+                        <option>Vegetarian</option>
+                        <option>Non-Vegetarian</option>
+                    </select>
+                </div>
 
-            <div class="col-12 col-md-4 d-flex gap-2">
-                <button id="resetFilters" class="btn btn-outline-secondary w-100" type="button">Reset</button>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Price</label>
+                    <select class="form-select rounded-pill">
+                        <option>All</option>
+                        <option>$0–$5</option>
+                        <option>$5–$10</option>
+                        <option>$10+</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 text-md-end">
+                    <button class="btn btn-primary rounded-pill px-4 mt-3 mt-md-0">
+                        Apply
+                    </button>
+                </div>
+
             </div>
         </div>
 
         <!-- ================= MEALS ================= -->
         <h2 class="fw-bold text-center mb-5" style="color:#2C6E99;">Meals</h2>
 
-        <div class="row g-4 row-cols-2 row-cols-md-3 row-cols-xl-4">
+        <div class="row g-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
             <!-- Chicken Teriyaki -->
             <div class="col" data-menu-item data-diet="non-vegetarian" data-price="11.99">
@@ -127,12 +133,13 @@
 
         </div>
 
-        <hr class="my-5">
 
         <!-- ================= DRINKS ================= -->
-        <h2 class="fw-bold text-center mb-5" style="color:#2C6E99;">Drinks</h2>
+        <div class="container mt-5">
+            <h2 class="fw-bold text-center mb-5" style="color:#2C6E99;">Drinks</h2>
+        </div>
 
-        <div class="row g-4 row-cols-2 row-cols-md-3 row-cols-xl-4">
+        <div class="row g-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
             <!-- Iced Tea -->
             <div class="col" data-menu-item data-diet="vegan" data-price="2.49">
@@ -180,12 +187,14 @@
 
         </div>
 
-        <hr class="my-5">
+
 
         <!-- ================= SIDES ================= -->
-        <h2 class="fw-bold text-center mb-5" style="color:#2C6E99;">Sides</h2>
+        <div class="container mt-5">
+            <h2 class="fw-bold text-center mb-5" style="color:#2C6E99;">Sides</h2>
+        </div>
 
-        <div class="row g-4 row-cols-2 row-cols-md-3 row-cols-xl-4">
+        <div class="row g-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
             <!-- Garlic Bread -->
             <div class="col" data-menu-item data-diet="vegetarian" data-price="2.99">
