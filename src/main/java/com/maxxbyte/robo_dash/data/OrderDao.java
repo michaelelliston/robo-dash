@@ -6,10 +6,7 @@ import com.maxxbyte.robo_dash.models.OrderStatus;
 import com.maxxbyte.robo_dash.models.Profile;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +14,31 @@ import java.util.List;
 public class OrderDao extends DaoBase{
     public OrderDao(DataSource dataSource) {
         super(dataSource);
+    }
+
+    public Order create(Order order)
+    {
+        String sql = "INSERT INTO orders (order_id, user_id, order_date, location_id, total_price, order_progress) " +
+                " VALUES (?, ?, ?, ?, ?, ?)";
+
+        try(Connection connection = getConnection())
+        {
+            PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, order.getOrderId());
+            ps.setInt(2, order.getUserId());
+            ps.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setInt(4, order.getDeliveryLocationId());
+            ps.setDouble(5, order.getTotal());
+            ps.setString(6, String.valueOf(order.getStatus()));
+
+            ps.executeUpdate();
+
+            return order;
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
     public Order getById(int orderId)
