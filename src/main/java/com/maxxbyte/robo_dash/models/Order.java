@@ -76,7 +76,7 @@ public class Order {
     public int getOrderId() {
         return orderId;
     }
-    public void setOrderId(int orderId) {}
+    public void setOrderId(int orderId) {this.orderId = orderId;}
 
 
 }
