@@ -41,7 +41,7 @@ public class OrderService {
             Product product = productDao.getById(itemDto.getProductId());
 
             OrderItem item = new OrderItem();
-            item.setProduct(product);
+            item.setProductId(product.getProductId());
             item.setQuantity(itemDto.getQuantity());
 
             items.put(product.getProductId(), item);

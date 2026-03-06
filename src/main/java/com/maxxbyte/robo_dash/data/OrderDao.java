@@ -1,16 +1,15 @@
 package com.maxxbyte.robo_dash.data;
 
-import com.maxxbyte.robo_dash.models.Location;
-import com.maxxbyte.robo_dash.models.Order;
-import com.maxxbyte.robo_dash.models.OrderStatus;
-import com.maxxbyte.robo_dash.models.Profile;
+import com.maxxbyte.robo_dash.models.*;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class OrderDao extends DaoBase{
@@ -42,6 +41,11 @@ public class OrderDao extends DaoBase{
                 order.setOrderId(keys.getInt(1));
             }
 
+            for (OrderItem item : order.getItems().values())
+            {
+                addOrderItem(connection, order.getOrderId(), item);
+            }
+
             return order;
         }
         catch (SQLException e)
@@ -62,7 +66,11 @@ public class OrderDao extends DaoBase{
 
             if (row.next())
             {
-                return mapRow(row);
+                Order order = mapRow(row);
+
+                order.setItems(getItemsByOrderId(connection, orderId));
+
+                return order;
             }
         }
         catch (SQLException e)
@@ -149,5 +157,44 @@ public class OrderDao extends DaoBase{
         {
             throw new RuntimeException(e);
         }
+    }
+
+    private void addOrderItem(Connection connection, int orderId, OrderItem item) throws SQLException
+    {
+        String sql = "INSERT INTO order_items (order_id, product_id, quantity) VALUES (?, ?, ?)";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        statement.setInt(1, orderId);
+        statement.setInt(2, item.getProductId());
+        statement.setInt(3, item.getQuantity());
+
+        statement.executeUpdate();
+    }
+
+    private Map<Integer, OrderItem> getItemsByOrderId(Connection connection, int orderId) throws SQLException
+    {
+        Map<Integer, OrderItem> items = new HashMap<>();
+
+        String sql = "SELECT * FROM order_items WHERE order_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, orderId);
+
+        ResultSet rows = statement.executeQuery();
+
+        while (rows.next())
+        {
+            OrderItem item = new OrderItem();
+
+            int productId = rows.getInt("product_id");
+
+            item.setProductId(productId);
+            item.setQuantity(rows.getInt("quantity"));
+
+            items.put(productId, item);
+        }
+
+        return items;
     }
 }

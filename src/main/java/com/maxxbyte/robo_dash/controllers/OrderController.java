@@ -63,7 +63,7 @@ public class OrderController {
             Product product = productDao.getById(itemDto.getProductId());
 
             OrderItem item = new OrderItem();
-            item.setProduct(product);
+            item.setProductId(product.getProductId());
             item.setQuantity(itemDto.getQuantity());
 
             order.getItems().put(product.getProductId(), item);
@@ -78,6 +78,13 @@ public class OrderController {
         robot.setCurrentOrder(createdOrder);
 
         return createdOrder;
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Order getOrderById(@PathVariable int id) {
+        return orderDao.getById(id);
     }
 
 }
