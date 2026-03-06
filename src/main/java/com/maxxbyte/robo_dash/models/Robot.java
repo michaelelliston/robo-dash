@@ -55,6 +55,7 @@ public class Robot {
 
     public void setCurrentOrder(Order currentOrder) {
         this.currentOrder = currentOrder;
+        assignRoute(currentOrder.deliveryLocationId);
     }
 
     public int getId() {
