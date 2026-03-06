@@ -2,12 +2,16 @@ package com.maxxbyte.robo_dash.models;
 
 public class OrderItem {
 
-    int productId;
+    Product product;
     int quantity = 1;
+
+    public OrderItem() {
+        this.product = new Product();
+    }
 
 
     public int getProductId() {
-        return productId;
+        return this.product.getProductId();
     }
 
     public int getQuantity() {
@@ -19,6 +23,14 @@ public class OrderItem {
     }
 
     public void setProductId(int productId) {
-        this.productId = productId;
+        this.product.setProductId(productId);
+    }
+
+    public Product  getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

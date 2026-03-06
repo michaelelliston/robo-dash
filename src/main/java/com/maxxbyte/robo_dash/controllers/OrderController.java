@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
@@ -63,7 +64,7 @@ public class OrderController {
             Product product = productDao.getById(itemDto.getProductId());
 
             OrderItem item = new OrderItem();
-            item.setProductId(product.getProductId());
+            item.setProduct(product);
             item.setQuantity(itemDto.getQuantity());
 
             order.getItems().put(product.getProductId(), item);
@@ -85,6 +86,16 @@ public class OrderController {
     @ResponseStatus(HttpStatus.OK)
     public Order getOrderById(@PathVariable int id) {
         return orderDao.getById(id);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("my-orders")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Order> getByUserId() {
+
+        User user = getCurrentUser();
+
+        return orderDao.getByUserId(user.getId());
     }
 
 }

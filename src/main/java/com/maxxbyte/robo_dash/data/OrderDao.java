@@ -82,7 +82,7 @@ public class OrderDao extends DaoBase{
 
     public List<Order> getByUserId(int userId)
     {
-        String sql = "SELECT * FROM orders WHERE user_id = ?";
+        String sql = "SELECT * FROM orders WHERE user_id = ? ORDER BY order_date DESC;";
         List<Order> orders = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -92,6 +92,8 @@ public class OrderDao extends DaoBase{
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Order order = mapRow(resultSet);
+
+                    order.setItems(getItemsByOrderId(connection, order.getOrderId()));
                     orders.add(order);
                 }
             }
@@ -176,7 +178,10 @@ public class OrderDao extends DaoBase{
     {
         Map<Integer, OrderItem> items = new HashMap<>();
 
-        String sql = "SELECT * FROM order_items WHERE order_id = ?";
+        String sql = "SELECT order_items.product_id, order_items.quantity, products.item_name, products.price, products.description, products.diet_type, products.image_url, products.prep_time, products.category_id " +
+                "FROM order_items " +
+                "JOIN products ON order_items.product_id = products.product_id " +
+                "WHERE order_items.order_id = ?;";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, orderId);
@@ -191,6 +196,19 @@ public class OrderDao extends DaoBase{
 
             item.setProductId(productId);
             item.setQuantity(rows.getInt("quantity"));
+
+            Product product = new Product();
+
+            product.setProductId(productId);
+            product.setName(rows.getString("item_name"));
+            product.setDescription(rows.getString("description"));
+            product.setDietType(rows.getString("diet_type"));
+            product.setPrice(rows.getDouble("price"));
+            product.setImageUrl(rows.getString("image_url"));
+            product.setPrepTime(rows.getInt("prep_time"));
+            product.setCategoryId(rows.getInt("category_id"));
+
+            item.setProduct(product);
 
             items.put(productId, item);
         }
