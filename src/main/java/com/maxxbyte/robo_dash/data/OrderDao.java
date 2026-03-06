@@ -142,15 +142,15 @@ public class OrderDao extends DaoBase{
         return order;
     }
 
-    public void updateOrderStatus(int orderId, OrderStatus status)
+    public void updateOrderStatus(int orderId, String status)
     {
-        String sql = "UPDATE orders SET status = ? WHERE order_id = ?";
+        String sql = "UPDATE orders SET order_progress = ? WHERE order_id = ?";
 
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            statement.setString(1, status.name());
+            statement.setString(1, status);
             statement.setInt(2, orderId);
 
             statement.executeUpdate();

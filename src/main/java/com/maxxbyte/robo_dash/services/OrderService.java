@@ -69,7 +69,7 @@ public class OrderService {
         return orderDao.getByUserId(userId);
     }
 
-    public void updateStatus(int orderId, OrderStatus status) {
+    public void updateStatus(int orderId, String status) {
         orderDao.updateOrderStatus(orderId, status);
     }
 }

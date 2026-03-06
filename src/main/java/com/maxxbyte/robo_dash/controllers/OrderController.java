@@ -98,4 +98,13 @@ public class OrderController {
         return orderDao.getByUserId(user.getId());
     }
 
+    @PreAuthorize("hasRole('USER')")
+    @PutMapping("{id}/status")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateOrderStatus(@PathVariable int id, @RequestBody String status)
+    {
+        System.out.println("Status received: [" + status + "]");
+        orderDao.updateOrderStatus(id, status);
+    }
+
 }
