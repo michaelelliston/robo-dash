@@ -163,23 +163,22 @@ public class OrderDao extends DaoBase{
 
     private void addOrderItem(Connection connection, int orderId, OrderItem item) throws SQLException
     {
-        String sql = "INSERT INTO order_items (order_id, product_id, quantity) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
 
         PreparedStatement statement = connection.prepareStatement(sql);
 
         statement.setInt(1, orderId);
         statement.setInt(2, item.getProductId());
         statement.setInt(3, item.getQuantity());
+        statement.setDouble(4, item.getPrice());
 
         statement.executeUpdate();
     }
 
-    //TODO: Currently, all order updates do not recalculate their price afterwards.
-
     @Transactional
     public void addItemToOrder(int orderId, OrderItem item)
     {
-        String sql = "INSERT INTO order_items (order_id, product_id, quantity) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
 
         try (Connection connection = getConnection())
         {
@@ -188,8 +187,11 @@ public class OrderDao extends DaoBase{
             statement.setInt(1, orderId);
             statement.setInt(2, item.getProductId());
             statement.setInt(3, item.getQuantity());
+            statement.setDouble(4, item.getPrice());
 
             statement.executeUpdate();
+
+            updateOrderTotal(connection, orderId);
         }
         catch (SQLException e)
         {
@@ -211,6 +213,8 @@ public class OrderDao extends DaoBase{
             statement.setInt(3, productId);
 
             statement.executeUpdate();
+
+            updateOrderTotal(connection, orderId);
         }
         catch (SQLException e)
         {
@@ -231,6 +235,8 @@ public class OrderDao extends DaoBase{
             statement.setInt(2, productId);
 
             statement.executeUpdate();
+
+            updateOrderTotal(connection, orderId);
         }
         catch (SQLException e)
         {
@@ -297,6 +303,27 @@ public class OrderDao extends DaoBase{
             }
 
             return 0.0;
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void updateOrderTotal(Connection connection, int orderId)
+    {
+        double newTotal = calculateOrderTotal(connection, orderId);
+
+        String sql = "UPDATE orders SET total_price = ? WHERE order_id = ?";
+
+        try
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setDouble(1, newTotal);
+            statement.setInt(2, orderId);
+
+            statement.executeUpdate();
         }
         catch (SQLException e)
         {

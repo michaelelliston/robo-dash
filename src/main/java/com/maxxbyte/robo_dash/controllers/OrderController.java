@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -67,6 +68,7 @@ public class OrderController {
             OrderItem item = new OrderItem();
             item.setProduct(product);
             item.setQuantity(itemDto.getQuantity());
+            item.setPrice(product.getPrice());
 
             order.getItems().put(product.getProductId(), item);
 
@@ -86,13 +88,19 @@ public class OrderController {
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public Order getOrderById(@PathVariable int id) {
-        return orderDao.getById(id);
+        Order order = orderDao.getById(id);
+        User user = getCurrentUser();
+
+        if (order.getUserId() != user.getId()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You cannot view this order");
+        }
+        return order;
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("my-orders")
     @ResponseStatus(HttpStatus.OK)
-    public List<Order> getByUserId() {
+    public List<Order> getMyOrders() {
 
         User user = getCurrentUser();
 
@@ -104,6 +112,13 @@ public class OrderController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateOrderStatus(@PathVariable int id, @RequestBody String status)
     {
+        Order  order = orderDao.getById(id);
+
+        if(order.getStatus() == OrderStatus.COMPLETED)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order status cannot be modified");
+        }
+
         orderDao.updateOrderStatus(id, status);
     }
 
@@ -112,12 +127,44 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     public void addItemToOrder(@PathVariable int orderId, @RequestBody CreateOrderItemDto dto)
     {
+
+        User user = getCurrentUser();
+
+        Order order = orderDao.getById(orderId);
+
+        if (order.getUserId() != user.getId()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You cannot modify this order");
+        }
+
+        if(order.getStatus() != OrderStatus.IN_PROGRESS)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order cannot be modified");
+        }
+
+        Product product = productDao.getById(dto.getProductId());
+
         OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(product);
         orderItem.setQuantity(dto.getQuantity());
-        orderItem.setProductId(dto.getProductId());
-        orderItem.setProduct(productDao.getById(dto.getProductId()));
+        orderItem.setPrice(product.getPrice());
+        orderItem.setProductId(product.getProductId());
 
         orderDao.addItemToOrder(orderId, orderItem);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping("/{orderId}/items/{productId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeItemFromOrder(@PathVariable int orderId, @PathVariable int productId)
+    {
+        Order order = orderDao.getById(orderId);
+
+        if(order.getStatus() != OrderStatus.IN_PROGRESS)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order cannot be modified");
+        }
+
+        orderDao.removeItemFromOrder(orderId, productId);
     }
 
 }

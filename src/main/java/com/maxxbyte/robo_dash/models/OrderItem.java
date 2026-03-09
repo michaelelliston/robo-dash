@@ -4,6 +4,7 @@ public class OrderItem {
 
     Product product;
     int quantity = 1;
+    double price;
 
     public OrderItem() {
         this.product = new Product();
@@ -32,5 +33,13 @@ public class OrderItem {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
