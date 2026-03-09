@@ -64,6 +64,66 @@ public class ProfileDao extends DaoBase{
         }
     }
 
+    public void updateAddress(int userId, String address, String city, String state, String zip)
+    {
+        String sql = "UPDATE profiles SET address = ?, city = ?, state = ?, zip = ? WHERE user_id = ?";
+
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, address);
+            statement.setString(2, city);
+            statement.setString(3, state);
+            statement.setString(4, zip);
+            statement.setInt(5, userId);
+
+            statement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updatePhone(int userId, String phone)
+    {
+        String sql = "UPDATE profiles SET phone = ? WHERE user_id = ?";
+
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, phone);
+            statement.setInt(5, userId);
+
+            statement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateEmail(int userId, String email)
+    {
+        String sql = "UPDATE profiles SET email = ? WHERE user_id = ?";
+
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, email);
+            statement.setInt(5, userId);
+
+            statement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
     private Profile mapRow(ResultSet row) throws SQLException
     {
         int userId = row.getInt("user_id");
