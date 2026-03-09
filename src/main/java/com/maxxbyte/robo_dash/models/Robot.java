@@ -29,10 +29,9 @@ public class Robot {
         this.homeLocation = navigationService.getLocationById(61);
     }
 
-    public Route assignRoute(int locationId) {
+    public void assignRoute(int locationId) {
         Location destination = navigationService.getLocationById(locationId);
         currentRoute = navigationService.calculateRoute(homeLocation, destination);
-        return currentRoute;
     }
 
     public void chargeBattery() {
@@ -55,6 +54,7 @@ public class Robot {
 
     public void setCurrentOrder(Order currentOrder) {
         this.currentOrder = currentOrder;
+        assignRoute(currentOrder.deliveryLocationId);
     }
 
     public int getId() {

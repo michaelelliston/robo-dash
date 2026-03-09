@@ -9,6 +9,7 @@ import com.maxxbyte.robo_dash.models.dto.CreateOrderDto;
 import com.maxxbyte.robo_dash.models.dto.CreateOrderItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -103,8 +104,20 @@ public class OrderController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateOrderStatus(@PathVariable int id, @RequestBody String status)
     {
-        System.out.println("Status received: [" + status + "]");
         orderDao.updateOrderStatus(id, status);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/{orderId}/items")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addItemToOrder(@PathVariable int orderId, @RequestBody CreateOrderItemDto dto)
+    {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setQuantity(dto.getQuantity());
+        orderItem.setProductId(dto.getProductId());
+        orderItem.setProduct(productDao.getById(dto.getProductId()));
+
+        orderDao.addItemToOrder(orderId, orderItem);
     }
 
 }

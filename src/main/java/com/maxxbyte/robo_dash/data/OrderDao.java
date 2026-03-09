@@ -5,11 +5,11 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class OrderDao extends DaoBase{
@@ -174,6 +174,70 @@ public class OrderDao extends DaoBase{
         statement.executeUpdate();
     }
 
+    //TODO: Currently, all order updates do not recalculate their price afterwards.
+
+    @Transactional
+    public void addItemToOrder(int orderId, OrderItem item)
+    {
+        String sql = "INSERT INTO order_items (order_id, product_id, quantity) VALUES (?, ?, ?)";
+
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, orderId);
+            statement.setInt(2, item.getProductId());
+            statement.setInt(3, item.getQuantity());
+
+            statement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Transactional
+    public void updateOrderItemQuantity(int orderId, int productId, int quantity)
+    {
+        String sql = "UPDATE order_items SET quantity = ? WHERE order_id = ? AND product_id = ?";
+
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, quantity);
+            statement.setInt(2, orderId);
+            statement.setInt(3, productId);
+
+            statement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Transactional
+    public void removeItemFromOrder(int orderId, int productId)
+    {
+        String sql = "DELETE FROM order_items WHERE order_id = ? AND product_id = ?";
+
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, orderId);
+            statement.setInt(2, productId);
+
+            statement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
     private Map<Integer, OrderItem> getItemsByOrderId(Connection connection, int orderId) throws SQLException
     {
         Map<Integer, OrderItem> items = new HashMap<>();
@@ -214,5 +278,29 @@ public class OrderDao extends DaoBase{
         }
 
         return items;
+    }
+
+    private double calculateOrderTotal(Connection connection, int orderId)
+    {
+        String sql = "SELECT SUM(quantity * price) AS total FROM order_items WHERE order_id = ?";
+
+        try
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, orderId);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next())
+            {
+                return result.getDouble("total");
+            }
+
+            return 0.0;
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 }
