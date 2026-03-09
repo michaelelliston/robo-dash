@@ -174,6 +174,8 @@ public class OrderDao extends DaoBase{
         statement.executeUpdate();
     }
 
+    //TODO: Currently, all order updates do not recalculate their price afterwards.
+
     @Transactional
     public void addItemToOrder(int orderId, OrderItem item)
     {
