@@ -3,7 +3,9 @@ package com.maxxbyte.robo_dash.controllers;
 
 import com.maxxbyte.robo_dash.data.ProfileDao;
 import com.maxxbyte.robo_dash.data.UserDao;
+import com.maxxbyte.robo_dash.models.Profile;
 import com.maxxbyte.robo_dash.models.User;
+import com.maxxbyte.robo_dash.models.dto.ProfileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,8 +38,20 @@ public class ProfileController {
     @PreAuthorize("hasRole('USER')")
     @PutMapping("edit")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateUser(@PathVariable int userId, @RequestBody String firstName, String lastName, String phone, String email, String address, String city, String state, String zip)
+    public void updateUser(@RequestBody ProfileDto profileDto)
     {
         User user = getCurrentUser();
+        Profile profile = new Profile();
+
+        profile.setFirstName(profileDto.getFirstName());
+        profile.setLastName(profileDto.getLastName());
+        profile.setEmail(profileDto.getEmail());
+        profile.setPhone(profileDto.getPhone());
+        profile.setAddress(profileDto.getAddress());
+        profile.setCity(profileDto.getCity());
+        profile.setState(profileDto.getState());
+        profile.setZip(profileDto.getZip());
+
+        profileDao.update(user.getId(), profile);
     }
 }
