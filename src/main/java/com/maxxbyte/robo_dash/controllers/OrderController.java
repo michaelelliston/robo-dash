@@ -159,9 +159,15 @@ public class OrderController {
     {
         Order order = orderDao.getById(orderId);
 
+        User user =  getCurrentUser();
+
         if(order.getStatus() != OrderStatus.IN_PROGRESS)
         {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order cannot be modified");
+        }
+
+        if (order.getUserId() != user.getId()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You cannot modify this order");
         }
 
         orderDao.removeItemFromOrder(orderId, productId);
