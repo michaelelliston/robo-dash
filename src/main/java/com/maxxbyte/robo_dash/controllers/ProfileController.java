@@ -3,7 +3,9 @@ package com.maxxbyte.robo_dash.controllers;
 
 import com.maxxbyte.robo_dash.data.ProfileDao;
 import com.maxxbyte.robo_dash.data.UserDao;
+import com.maxxbyte.robo_dash.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,4 +23,14 @@ public class ProfileController {
         this.profileDao = profileDao;
         this.userDao = userDao;
     }
+
+    private User getCurrentUser() {
+        String username = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+
+        return userDao.getByUserName(username);
+    }
+
 }
