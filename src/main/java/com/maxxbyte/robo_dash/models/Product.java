@@ -13,13 +13,13 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, String description, String dietType, String imageUrl, double price, int itemId, int prepTime, int categoryId) {
+    public Product(String name, String description, String dietType, String imageUrl, double price, int productId, int prepTime, int categoryId) {
         this.name = name;
         this.description = description;
         this.dietType = dietType;
         this.imageUrl = imageUrl;
         this.price = price;
-        this.productId = itemId;
+        this.productId = productId;
         this.prepTime = prepTime;
         this.categoryId = categoryId;
     }
@@ -76,7 +76,7 @@ public class Product {
         this.price = price;
     }
 
-    public void setItemId(int productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 

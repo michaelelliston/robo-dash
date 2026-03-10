@@ -35,11 +35,6 @@ public class Order {
     }
 
     public double getTotal() {
-        double totalPrice = 0;
-        for (OrderItem orderItem : items.values()) {
-            Product p = orderItem.getProduct();
-            totalPrice += p.getPrice();
-        }
         return totalPrice;
     }
 
@@ -71,7 +66,9 @@ public class Order {
     public OrderStatus getStatus() {
         return status;
     }
-    public void setStatus(OrderStatus status) {}
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
 
     public int getOrderId() {
         return orderId;

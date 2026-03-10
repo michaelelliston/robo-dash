@@ -9,12 +9,15 @@ import com.maxxbyte.robo_dash.models.dto.CreateOrderDto;
 import com.maxxbyte.robo_dash.models.dto.CreateOrderItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
@@ -65,6 +68,7 @@ public class OrderController {
             OrderItem item = new OrderItem();
             item.setProduct(product);
             item.setQuantity(itemDto.getQuantity());
+            item.setPrice(product.getPrice());
 
             order.getItems().put(product.getProductId(), item);
 
@@ -78,6 +82,95 @@ public class OrderController {
         robot.setCurrentOrder(createdOrder);
 
         return createdOrder;
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Order getOrderById(@PathVariable int id) {
+        Order order = orderDao.getById(id);
+        User user = getCurrentUser();
+
+        if (order.getUserId() != user.getId()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You cannot view this order");
+        }
+        return order;
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("my-orders")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Order> getMyOrders() {
+
+        User user = getCurrentUser();
+
+        return orderDao.getByUserId(user.getId());
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @PutMapping("{id}/status")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateOrderStatus(@PathVariable int id, @RequestBody String status)
+    {
+        Order  order = orderDao.getById(id);
+
+        if(order.getStatus() == OrderStatus.COMPLETED)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order status cannot be modified");
+        }
+
+        orderDao.updateOrderStatus(id, status);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/{orderId}/items")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addItemToOrder(@PathVariable int orderId, @RequestBody CreateOrderItemDto dto)
+    {
+
+        User user = getCurrentUser();
+
+        Order order = orderDao.getById(orderId);
+
+        if (order.getUserId() != user.getId()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You cannot modify this order");
+        }
+
+        if(order.getStatus() != OrderStatus.IN_PROGRESS)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order cannot be modified");
+        }
+
+        Product product = productDao.getById(dto.getProductId());
+
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(product);
+        orderItem.setQuantity(dto.getQuantity());
+        orderItem.setPrice(product.getPrice());
+        orderItem.setProductId(product.getProductId());
+
+        orderDao.addItemToOrder(orderId, orderItem);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping("/{orderId}/items/{productId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeItemFromOrder(@PathVariable int orderId, @PathVariable int productId)
+    {
+        Order order = orderDao.getById(orderId);
+
+        User user =  getCurrentUser();
+
+        if(order.getStatus() != OrderStatus.IN_PROGRESS)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order cannot be modified");
+        }
+
+        if (order.getUserId() != user.getId()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You cannot modify this order");
+        }
+
+        orderDao.removeItemFromOrder(orderId, productId);
     }
 
 }
