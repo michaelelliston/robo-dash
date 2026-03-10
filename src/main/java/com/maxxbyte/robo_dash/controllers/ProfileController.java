@@ -5,13 +5,13 @@ import com.maxxbyte.robo_dash.data.ProfileDao;
 import com.maxxbyte.robo_dash.data.UserDao;
 import com.maxxbyte.robo_dash.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/profiles")
+@RequestMapping("/profile")
 @CrossOrigin
 public class ProfileController {
 
@@ -33,4 +33,11 @@ public class ProfileController {
         return userDao.getByUserName(username);
     }
 
+    @PreAuthorize("hasRole('USER')")
+    @PutMapping("edit")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateUser(@PathVariable int userId, @RequestBody String firstName, String lastName, String phone, String email, String address, String city, String state, String zip)
+    {
+        User user = getCurrentUser();
+    }
 }
