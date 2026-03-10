@@ -7,6 +7,7 @@ import com.maxxbyte.robo_dash.data.UserDao;
 import com.maxxbyte.robo_dash.models.*;
 import com.maxxbyte.robo_dash.models.dto.CreateOrderDto;
 import com.maxxbyte.robo_dash.models.dto.CreateOrderItemDto;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,7 @@ public class OrderController {
         return userDao.getByUserName(username);
     }
 
+    @Operation(summary = "Create a new order for the current user")
     @PostMapping
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.CREATED)
