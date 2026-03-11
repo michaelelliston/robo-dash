@@ -70,15 +70,16 @@ class UserService {
         return this.currentUser;
     }
 
-    setHeaderLogin()
-    {
-        const user = {
-                username: this.getUserName(),
-                loggedin: this.isLoggedIn(),
-                loggedout: !this.isLoggedIn()
-            };
+    setHeaderLogin() {
+        const headerUser = document.getElementById("header-user");
 
-        templateBuilder.build('header', user, 'header-user');
+        if(!headerUser) return;
+
+        if(this.isLoggedIn()) {
+            headerUser.innerText = `Welcome ${this.getUserName()}`;
+        } else {
+            headerUser.innerText = "Not logged in";
+        }
     }
 
     register (username, password, confirm)
@@ -123,12 +124,14 @@ class UserService {
                 cartService.loadCart();
             })
             .catch(error => {
-                const data = {
-                    error: "Login failed."
-                };
 
-                templateBuilder.append("error", data, "errors")
-            })
+                const errorDiv = document.getElementById("errors");
+
+                if(errorDiv){
+                    errorDiv.innerText = "Login failed.";
+                }
+
+            });
     }
 
     logout()
