@@ -120,16 +120,20 @@ class UserService {
                 this.setHeaderLogin();
 
                 axios.defaults.headers.common = {'Authorization': `Bearer ${this.currentUser.token}`}
-                productService.enableButtons();
-                cartService.loadCart();
             })
             .catch(error => {
 
-                const errorDiv = document.getElementById("errors");
+                console.error("LOGIN ERROR:", error);
 
-                if(errorDiv){
-                    errorDiv.innerText = "Login failed.";
-                }
+                    if(error.response){
+                        console.error("Server response:", error.response.data);
+                    }
+
+                    const errorDiv = document.getElementById("errors");
+
+                    if(errorDiv){
+                        errorDiv.innerText = "Login failed.";
+                    }
 
             });
     }
