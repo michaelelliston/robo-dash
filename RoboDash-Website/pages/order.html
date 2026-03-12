@@ -92,250 +92,114 @@
         </div>
 
         <!-- ================= MEALS ================= -->
-        <h2 class="fw-bold text-center mb-5" style="color:#2C6E99;">Meals</h2>
+        <h2 class="fw-bold text-center mb-5" style="color:#2C6E99;">
+            Menu
+        </h2>
 
-        <div class="row g-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
-            <!-- Chicken Teriyaki -->
-            <div class="col" data-menu-item data-diet="non-vegetarian" data-price="11.99">
-                <div class="card h-100 shadow-sm">
-                    <img class="card-img-top" src="../assets/images/Chicken-Teriyaki.jpg" alt="">
-                    <div class="card-body p-3 d-flex flex-column">
-                        <div class="text-center">
-                            <h5 class="fw-bold">Chicken Teriyaki Bowl</h5>
-                            <p class="text-muted small mt-2">
-                                Grilled chicken over rice with teriyaki sauce.
-                            </p>
-                        </div>
-                        <div class="mt-auto d-flex justify-content-between align-items-center pt-3">
-                            <span class="fw-bold fs-5" style="color:#2C6E99;">$11.99</span>
-                            <span class="badge bg-white border text-muted">Non-Veg</span>
-                        </div>
-                    </div>
-                    <div class="card-footer p-3 bg-transparent border-0 text-center">
-                        <button class="btn btn-primary rounded-pill px-4 add-to-cart"
-                                data-id="1"
-                                data-name="Chicken Teriyaki Bowl"
-                                data-price="11.99"
-                                data-image="Chicken-Teriyaki.jpg">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Veggie Fried Rice -->
-            <div class="col" data-menu-item data-diet="vegetarian" data-price="9.99">
-                <div class="card h-100 shadow-sm">
-                    <img class="card-img-top" src="../assets/images/Veggie-Fried_Rice.webp" alt="">
-                    <div class="card-body p-3 d-flex flex-column">
-                        <div class="text-center">
-                            <h5 class="fw-bold">Veggie Fried Rice</h5>
-                            <p class="text-muted small mt-2">
-                                Stir-fried rice with fresh vegetables.
-                            </p>
-                        </div>
-                        <div class="mt-auto d-flex justify-content-between align-items-center pt-3">
-                            <span class="fw-bold fs-5" style="color:#2C6E99;">$9.99</span>
-                            <span class="badge bg-white border text-muted">Vegetarian</span>
-                        </div>
-                    </div>
-                    <div class="card-footer p-3 bg-transparent border-0 text-center">
-                        <a class="btn btn-primary rounded-pill px-4" href="#">Add to Cart</a>
-                    </div>
-                </div>
-            </div>
-
+        <div id="product-list"
+             class="row g-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
         </div>
 
-
-        <!-- ================= DRINKS ================= -->
-        <div class="container mt-5">
-            <h2 class="fw-bold text-center mb-5" style="color:#2C6E99;">Drinks</h2>
-        </div>
-
-        <div class="row g-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
-            <!-- Iced Tea -->
-            <div class="col" data-menu-item data-diet="vegan" data-price="2.49">
-                <div class="card h-100 shadow-sm">
-                    <img class="card-img-top" src="../assets/images/iced-tea.webp" alt="">
-                    <div class="card-body p-3 d-flex flex-column">
-                        <div class="text-center">
-                            <h5 class="fw-bold">Iced Tea</h5>
-                            <p class="text-muted small mt-2">
-                                Fresh brewed and served chilled.
-                            </p>
-                        </div>
-                        <div class="mt-auto d-flex justify-content-between align-items-center pt-3">
-                            <span class="fw-bold fs-5" style="color:#2C6E99;">$2.49</span>
-                            <span class="badge bg-white border text-muted">Vegan</span>
-                        </div>
-                    </div>
-                    <div class="card-footer p-3 bg-transparent border-0 text-center">
-                        <a class="btn btn-primary rounded-pill px-4" href="#">Add to Cart</a>
-                    </div>
-                </div>
+        <footer class="py-4 bg-dark">
+            <div class="container text-center text-white">
+                Copyright © 2026 RoboDash
             </div>
+        </footer>
 
-            <!-- Lemonade -->
-            <div class="col" data-menu-item data-diet="vegan" data-price="2.99">
-                <div class="card h-100 shadow-sm">
-                    <img class="card-img-top" src="../assets/images/Lemonade.webp" alt="">
-                    <div class="card-body p-3 d-flex flex-column">
-                        <div class="text-center">
-                            <h5 class="fw-bold">Lemonade</h5>
-                            <p class="text-muted small mt-2">
-                                Fresh squeezed and refreshing.
-                            </p>
-                        </div>
-                        <div class="mt-auto d-flex justify-content-between align-items-center pt-3">
-                            <span class="fw-bold fs-5" style="color:#2C6E99;">$2.99</span>
-                            <span class="badge bg-white border text-muted">Vegan</span>
-                        </div>
-                    </div>
-                    <div class="card-footer p-3 bg-transparent border-0 text-center">
-                        <a class="btn btn-primary rounded-pill px-4" href="#">Add to Cart</a>
-                    </div>
-                </div>
-            </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="../js/config.js"></script>
+        <script src="../js/service/user-service.js"></script>
+        <script src="../js/service/shoppingcart-service.js"></script>
+        <script src="../js/service/product-service.js"></script>
+        <script src="../js/scripts.js"></script>
+        <script>
+            document.addEventListener("click", function(e) {
 
-        </div>
+    if (!e.target.classList.contains("add-to-cart")) return;
 
-
-        <!-- ================= SIDES ================= -->
-        <div class="container mt-5">
-            <h2 class="fw-bold text-center mb-5" style="color:#2C6E99;">Sides</h2>
-        </div>
-
-        <div class="row g-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
-            <!-- Garlic Bread -->
-            <div class="col" data-menu-item data-diet="vegetarian" data-price="2.99">
-                <div class="card h-100 shadow-sm">
-                    <img class="card-img-top" src="../assets/images/Garlic-Bread.webp" alt="">
-                    <div class="card-body p-3 d-flex flex-column">
-                        <div class="text-center">
-                            <h5 class="fw-bold">Garlic Bread</h5>
-                            <p class="text-muted small mt-2">
-                                Toasted bread with garlic butter.
-                            </p>
-                        </div>
-                        <div class="mt-auto d-flex justify-content-between align-items-center pt-3">
-                            <span class="fw-bold fs-5" style="color:#2C6E99;">$2.99</span>
-                            <span class="badge bg-white border text-muted">Vegetarian</span>
-                        </div>
-                    </div>
-                    <div class="card-footer p-3 bg-transparent border-0 text-center">
-                        <a class="btn btn-primary rounded-pill px-4" href="#">Add to Cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Side Salad -->
-            <div class="col" data-menu-item data-diet="vegan" data-price="3.49">
-                <div class="card h-100 shadow-sm">
-                    <img class="card-img-top" src="../assets/images/Side-Salad.jpg" alt="">
-                    <div class="card-body p-3 d-flex flex-column">
-                        <div class="text-center">
-                            <h5 class="fw-bold">Side Salad</h5>
-                            <p class="text-muted small mt-2">
-                                Fresh greens with house dressing.
-                            </p>
-                        </div>
-                        <div class="mt-auto d-flex justify-content-between align-items-center pt-3">
-                            <span class="fw-bold fs-5" style="color:#2C6E99;">$3.49</span>
-                            <span class="badge bg-white border text-muted">Vegan</span>
-                        </div>
-                    </div>
-                    <div class="card-footer p-3 bg-transparent border-0 text-center">
-                        <a class="btn btn-primary rounded-pill px-4" href="#">Add to Cart</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<footer class="py-4 bg-dark">
-    <div class="container text-center text-white">
-        Copyright © 2026 RoboDash
-    </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="../js/config.js"></script>
-<script src="../js/service/user-service.js"></script>
-<script src="../js/service/shoppingcart-service.js"></script>
-<script src="../js/scripts.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-
-    const buttons = document.querySelectorAll(".add-to-cart");
-
-    buttons.forEach(btn => {
-
-    btn.addEventListener("click", () => {
+    const btn = e.target;
 
     const product = {
-    id: Number(btn.dataset.id),
-    name: btn.dataset.name,
-    price: Number(btn.dataset.price),
-    imageUrl: btn.dataset.image
+        id: Number(btn.dataset.id),
+        name: btn.dataset.name,
+        price: Number(btn.dataset.price),
+        imageUrl: btn.dataset.image
     };
 
     cartService.addToCart(product);
 
     console.log("Added to cart:", product);
-    });
 
-    });
+});
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
 
-    });
-</script>
+            const buttons = document.querySelectorAll(".add-to-cart");
 
-<script>
-    function parseRange(rangeStr) {
-      if (!rangeStr || rangeStr === "all") return { min: -Infinity, max: Infinity };
-      const [min, max] = rangeStr.split("-").map(Number);
-      return { min, max };
-    }
+            buttons.forEach(btn => {
 
-    function applyFilters() {
-      const dietValue = document.getElementById("dietFilter").value;   // all | vegan | vegetarian | non-vegetarian
-      const priceValue = document.getElementById("priceFilter").value; // all | "0-10" etc.
-      const { min, max } = parseRange(priceValue);
+            btn.addEventListener("click", () => {
 
-      const items = document.querySelectorAll("[data-menu-item]");
-      items.forEach(item => {
-        const diet = (item.dataset.diet || "").toLowerCase();
-        const price = Number(item.dataset.price);
+            const product = {
+            id: Number(btn.dataset.id),
+            name: btn.dataset.name,
+            price: Number(btn.dataset.price),
+            imageUrl: btn.dataset.image
+            };
 
-        const dietMatch = (dietValue === "all") || (diet === dietValue);
-        const priceMatch = Number.isFinite(price) && price >= min && price <= max;
+            cartService.addToCart(product);
 
-        // show/hide by toggling Bootstrap's d-none
-        item.classList.toggle("d-none", !(dietMatch && priceMatch));
-      });
-    }
+            console.log("Added to cart:", product);
+            });
 
-    function resetFilters() {
-      document.getElementById("dietFilter").value = "all";
-      document.getElementById("priceFilter").value = "all";
-      applyFilters();
-    }
+            });
 
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("dietFilter").addEventListener("change", applyFilters);
-      document.getElementById("priceFilter").addEventListener("change", applyFilters);
-      document.getElementById("resetFilters").addEventListener("click", resetFilters);
+            });
+        </script>
 
-      applyFilters(); // initial
-    });
-</script>
+        <script>
+            function parseRange(rangeStr) {
+              if (!rangeStr || rangeStr === "all") return { min: -Infinity, max: Infinity };
+              const [min, max] = rangeStr.split("-").map(Number);
+              return { min, max };
+            }
 
+            function applyFilters() {
+              const dietValue = document.getElementById("dietFilter").value;   // all | vegan | vegetarian | non-vegetarian
+              const priceValue = document.getElementById("priceFilter").value; // all | "0-10" etc.
+              const { min, max } = parseRange(priceValue);
+
+              const items = document.querySelectorAll("[data-menu-item]");
+              items.forEach(item => {
+                const diet = (item.dataset.diet || "").toLowerCase();
+                const price = Number(item.dataset.price);
+
+                const dietMatch = (dietValue === "all") || (diet === dietValue);
+                const priceMatch = Number.isFinite(price) && price >= min && price <= max;
+
+                // show/hide by toggling Bootstrap's d-none
+                item.classList.toggle("d-none", !(dietMatch && priceMatch));
+              });
+            }
+
+            function resetFilters() {
+              document.getElementById("dietFilter").value = "all";
+              document.getElementById("priceFilter").value = "all";
+              applyFilters();
+            }
+
+            document.addEventListener("DOMContentLoaded", () => {
+              document.getElementById("dietFilter").addEventListener("change", applyFilters);
+              document.getElementById("priceFilter").addEventListener("change", applyFilters);
+              document.getElementById("resetFilters").addEventListener("click", resetFilters);
+
+              applyFilters(); // initial
+            });
+        </script>
+
+    </div>
+</section>
 </body>
 </html>
