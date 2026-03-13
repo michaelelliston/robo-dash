@@ -148,7 +148,9 @@ class ShoppingCartService {
         axios.post(url, order)
             .then(response => {
 
-                const orderId = response.data.id;
+            console.log("Order created:", response.data);
+
+                const orderId = response.data.orderId;
 
                 this.clearCart();
 
