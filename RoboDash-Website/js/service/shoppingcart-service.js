@@ -16,13 +16,13 @@ class ShoppingCartService {
 
     addToCart(product) {
 
-        const existing = this.cart.find(item => item.productId === product.id);
+        const existing = this.cart.find(item => item.productId === product.productId);
 
         if (existing) {
             existing.quantity++;
         } else {
             this.cart.push({
-                productId: product.id,
+                productId: product.productId,
                 name: product.name,
                 price: product.price,
                 imageUrl: product.imageUrl,
@@ -57,7 +57,8 @@ class ShoppingCartService {
 
         if (!cartControl) return;
 
-        cartControl.innerText = this.cart.length;
+        const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartControl.innerText = totalItems;
     }
 
     loadCartPage() {
