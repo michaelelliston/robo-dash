@@ -35,12 +35,14 @@
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
   --bs-primary: #0d6efd;
+  --rd-primary: #3B82B5;
   --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
+  --rd-light: #F4F7FA;
   --bs-dark: #212529;
   --bs-primary-rgb: 13, 110, 253;
   --bs-secondary-rgb: 108, 117, 125;
@@ -77,6 +79,14 @@
   --bs-link-hover-color: #0a58ca;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
+}
+
+.rd-light {
+  background-color: var(--rd-light);
+}
+
+.rd-primary-text {
+  color: var(--rd-primary);
 }
 
 *,
@@ -10895,4 +10905,55 @@ textarea.form-control-lg {
 
 .card:hover {
     transform: translateY(-5px);
+}
+.card {
+    border: none;
+    border-radius: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+.btn-primary {
+    background-color: #3B82B5;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #2C6E99;
+}
+.card {
+    border: none;
+    border-radius: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.btn-primary {
+    background-color: #3B82B5;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #2C6E99;
 }

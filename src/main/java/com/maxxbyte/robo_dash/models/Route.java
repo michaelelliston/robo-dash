@@ -12,7 +12,7 @@ public class Route {
 
     public Route() {}
 
-    public Route(Location startLocation, Location destination, ArrayList<Path> paths) {
+    public Route(Location startLocation, Location destination, List<Path> paths) {
         this.startingLocation = startLocation;
         this.destination = destination;
         this.paths = paths;
