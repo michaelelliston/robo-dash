@@ -61,7 +61,6 @@ class ShoppingCartService {
     }
 
     loadCartPage() {
-
         const main = document.getElementById("main");
         if (!main) return;
 
@@ -73,13 +72,12 @@ class ShoppingCartService {
         }
 
         this.cart.forEach(item => {
-
             const div = document.createElement("div");
-            div.classList.add("cart-item");
+            div.classList.add("cart-item", "mb-4", "p-3", "border", "rounded");
 
             div.innerHTML = `
                 <h3>${item.name}</h3>
-                <img src="/images/products/${item.imageUrl}" width="120">
+                <img src="../Images/${item.imageUrl}" width="120">
                 <p>Price: $${item.price}</p>
                 <p>Quantity: ${item.quantity}</p>
                 <button class="btn btn-danger">Remove</button>
@@ -89,6 +87,31 @@ class ShoppingCartService {
                 .addEventListener("click", () => this.removeFromCart(item.productId));
 
             main.appendChild(div);
+        });
+
+        const checkoutSection = document.createElement("div");
+        checkoutSection.classList.add("mt-4", "p-3", "border", "rounded");
+
+        checkoutSection.innerHTML = `
+            <h3>Checkout</h3>
+            <div class="mb-3">
+                <label for="deliveryLocationId" class="form-label">Delivery Location ID</label>
+                <input type="number" id="deliveryLocationId" class="form-control" placeholder="Enter location ID">
+            </div>
+            <button id="checkoutBtn" class="btn btn-dark">Checkout</button>
+        `;
+
+        main.appendChild(checkoutSection);
+
+        document.getElementById("checkoutBtn").addEventListener("click", () => {
+            const deliveryLocationId = parseInt(document.getElementById("deliveryLocationId").value);
+
+            if (!deliveryLocationId) {
+                alert("Please enter a delivery location ID.");
+                return;
+            }
+
+            this.checkout(deliveryLocationId);
         });
     }
 
@@ -111,13 +134,15 @@ class ShoppingCartService {
 
         axios.post(url, order)
             .then(response => {
+                const createdOrder = response.data;
 
-                console.log("Order created:", response.data);
+                console.log("Order created:", createdOrder);
 
-                this.clearCart();
+                this.cart = [];
+                this.saveCart();
+                this.updateCartDisplay();
 
-                alert("Order placed successfully!");
-
+                window.location.href = `delivery.html?orderId=${createdOrder.id}`;
             })
             .catch(error => {
                 console.error("Checkout failed:", error);

@@ -21,54 +21,79 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 let routeLine = null;
 let robotMarker = null;
 
-startBtn.addEventListener("click", async () => {
-  try {
-    statusEl.textContent = "Fetching route...";
-    etaEl.textContent = "—";
+document.addEventListener("DOMContentLoaded", async () => {
 
-    // 1) Get route from backend
-    // Your controller: GET /robot/{id}
-    const route = await fetchJson(`${API_BASE}/robot/1`);
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get("orderId");
 
-    // 2) Build ordered locationId list from route.paths
-    // Route includes startingLocation and destination with lat/lon already,
-    // but paths only have IDs, so we fetch the locations for each step.
-    const locationIds = buildOrderedLocationIds(route);
-
-    // 3) Fetch locations (lat/lon) and build LatLng array
-    const points = [];
-    for (const id of locationIds) {
-      const loc = await fetchJson(`${API_BASE}/locations/${id}`);
-      points.push([loc.latitude, loc.longitude]);
+    if (!orderId) {
+        statusEl.textContent = "No order selected";
+        return;
     }
 
-    // 4) Draw route polyline
-    if (routeLine) routeLine.remove();
-    routeLine = L.polyline(points, { weight: 6 }).addTo(map);
-    map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
-
-    // 5) Place robot marker at start
-    if (robotMarker) robotMarker.remove();
-    robotMarker = L.circleMarker(points[0], { radius: 10 }).addTo(map);
-
-    // 6) Animate along the polyline
-    const speedMetersPerSecond = 1.2; // tune this
-    statusEl.textContent = "Delivering...";
-    animateAlong(points, route.paths, speedMetersPerSecond, (remainingSec) => {
-      etaEl.textContent = `${Math.ceil(remainingSec)}s`;
-    }, () => {
-      statusEl.textContent = "Delivered ✅";
-      etaEl.textContent = "0s";
-    });
-
-  } catch (e) {
-    console.error(e);
-    statusEl.textContent = "Error loading route";
-  }
+    await startDeliveryAnimation(orderId);
 });
 
+
+async function startDeliveryAnimation(orderId) {
+    try {
+        statusEl.textContent = "Fetching route...";
+        etaEl.textContent = "—";
+
+        const route = await fetchJson(`${API_BASE}/orders/${orderId}/route`);
+
+        const locationIds = buildOrderedLocationIds(route);
+
+        const points = [];
+        for (const id of locationIds) {
+            const loc = await fetchJson(`${API_BASE}/locations/${id}`);
+            points.push([loc.latitude, loc.longitude]);
+        }
+
+        if (routeLine) routeLine.remove();
+        routeLine = L.polyline(points, { weight: 6 }).addTo(map);
+        map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
+
+        if (robotMarker) robotMarker.remove();
+        robotMarker = L.circleMarker(points[0], { radius: 10 }).addTo(map);
+
+        statusEl.textContent = "Delivering...";
+        animateAlong(points, route.paths, null, (remainingSec) => {
+            etaEl.textContent = `${Math.ceil(remainingSec)}s`;
+        }, async () => {
+            statusEl.textContent = "Delivered ✅";
+            etaEl.textContent = "0s";
+
+            await fetch(`${API_BASE}/orders/${orderId}/status`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "text/plain",
+                    "Authorization": `Bearer ${JSON.parse(localStorage.getItem("user"))?.token || ""}`
+                },
+                body: "COMPLETED"
+            });
+        });
+
+    } catch (err) {
+        console.error(err);
+        statusEl.textContent = "Error loading route";
+    }
+}
+
+function getAuthHeaders() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  return user?.token
+    ? { Authorization: `Bearer ${user.token}` }
+    : {};
+}
+
 async function fetchJson(url) {
-  const res = await fetch(url);
+  const res = await fetch(url, {
+    headers: {
+      ...getAuthHeaders()
+    }
+  });
+
   if (!res.ok) throw new Error(`Request failed: ${res.status} ${url}`);
   return await res.json();
 }
