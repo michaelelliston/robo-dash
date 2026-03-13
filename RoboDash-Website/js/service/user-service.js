@@ -70,15 +70,16 @@ class UserService {
         return this.currentUser;
     }
 
-    setHeaderLogin()
-    {
-        const user = {
-                username: this.getUserName(),
-                loggedin: this.isLoggedIn(),
-                loggedout: !this.isLoggedIn()
-            };
+    setHeaderLogin() {
+        const headerUser = document.getElementById("header-user");
 
-        templateBuilder.build('header', user, 'header-user');
+        if(!headerUser) return;
+
+        if(this.isLoggedIn()) {
+            headerUser.innerText = `Welcome ${this.getUserName()}`;
+        } else {
+            headerUser.innerText = "Not logged in";
+        }
     }
 
     register (username, password, confirm)
@@ -119,16 +120,22 @@ class UserService {
                 this.setHeaderLogin();
 
                 axios.defaults.headers.common = {'Authorization': `Bearer ${this.currentUser.token}`}
-                productService.enableButtons();
-                cartService.loadCart();
             })
             .catch(error => {
-                const data = {
-                    error: "Login failed."
-                };
 
-                templateBuilder.append("error", data, "errors")
-            })
+                console.error("LOGIN ERROR:", error);
+
+                    if(error.response){
+                        console.error("Server response:", error.response.data);
+                    }
+
+                    const errorDiv = document.getElementById("errors");
+
+                    if(errorDiv){
+                        errorDiv.innerText = "Login failed.";
+                    }
+
+            });
     }
 
     logout()
