@@ -97,22 +97,34 @@ class ShoppingCartService {
             <h3>Checkout</h3>
             <div class="mb-3">
                 <label for="deliveryLocationId" class="form-label">Delivery Location ID</label>
-                <input type="number" id="deliveryLocationId" class="form-control" placeholder="Enter location ID">
+                <label for="locationSelect">Delivery Location</label>
+                <select id="locationSelect" class="form-select">
+                    <option value="" selected disabled>Select a delivery location...</option>
+                </select>
             </div>
             <button id="checkoutBtn" class="btn btn-dark">Checkout</button>
         `;
 
         main.appendChild(checkoutSection);
 
-        document.getElementById("checkoutBtn").addEventListener("click", () => {
-            const deliveryLocationId = parseInt(document.getElementById("deliveryLocationId").value);
+        document.getElementById("checkoutBtn")
+        .addEventListener("click", () => {
 
-            if (!deliveryLocationId) {
-                alert("Please enter a delivery location ID.");
+            const select = document.getElementById("locationSelect");
+
+            console.log("Selected location value:", select.value);
+
+            const locationId = document.getElementById("locationSelect").value;
+
+            console.log("Converted locationId:", locationId);
+
+            if (locationId === "") {
+                alert("Please select a delivery location.");
                 return;
             }
 
-            this.checkout(deliveryLocationId);
+            cartService.checkout(Number(locationId));
+
         });
     }
 
@@ -135,15 +147,16 @@ class ShoppingCartService {
 
         axios.post(url, order)
             .then(response => {
-                const createdOrder = response.data;
 
-                console.log("Order created:", createdOrder);
+            console.log("Order created:", response.data);
 
-                this.cart = [];
-                this.saveCart();
-                this.updateCartDisplay();
+                const orderId = response.data.orderId;
 
-                window.location.href = `delivery.html?orderId=${createdOrder.id}`;
+                this.clearCart();
+
+                window.location.href =
+                    `../pages/robot-route.html?orderId=${orderId}`;
+
             })
             .catch(error => {
                 console.error("Checkout failed:", error);
