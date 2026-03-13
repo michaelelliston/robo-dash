@@ -175,4 +175,17 @@ public class OrderController {
         orderDao.removeItemFromOrder(orderId, productId);
     }
 
+    @GetMapping("{id}/route")
+    @PreAuthorize("hasRole('USER')")
+    public Route getOrderRoute(@PathVariable int id) {
+        Order order = orderDao.getById(id);
+        User user = getCurrentUser();
+
+        if (order.getUserId() != user.getId()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You cannot view this order");
+        }
+
+        return robot.getCurrentRoute();
+    }
+
 }
