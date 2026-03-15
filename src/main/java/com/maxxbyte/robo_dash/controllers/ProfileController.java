@@ -35,10 +35,31 @@ public class ProfileController {
         return userDao.getByUserName(username);
     }
 
+    @GetMapping
+    public ProfileDto getProfile()
+    {
+        User user = getCurrentUser();
+        Profile profile = profileDao.getById(user.getId());
+
+        if (profile == null) {
+            return new ProfileDto();
+        }
+        ProfileDto profileDto = new ProfileDto();
+        profileDto.setFirstName(profile.getFirstName());
+        profileDto.setLastName(profile.getLastName());
+        profileDto.setCity(profile.getCity());
+        profileDto.setState(profile.getState());
+        profileDto.setZip(profile.getZip());
+        profileDto.setPhone(profile.getPhone());
+        profileDto.setAddress(profile.getAddress());
+        profileDto.setEmail(profile.getEmail());
+        return  profileDto;
+    }
+
     @PreAuthorize("hasRole('USER')")
     @PutMapping("edit")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateUser(@RequestBody ProfileDto profileDto)
+    public void updateProfile(@RequestBody ProfileDto profileDto)
     {
         User user = getCurrentUser();
         Profile profile = new Profile();
