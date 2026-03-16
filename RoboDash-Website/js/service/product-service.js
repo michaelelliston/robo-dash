@@ -71,7 +71,7 @@ class ProductService {
                 <div class="card-footer p-3 bg-transparent border-0 text-center">
 
                     <button class="btn btn-primary rounded-pill px-4 add-to-cart"
-                            data-id="${product.id}"
+                            data-id="${product.productId}"
                             data-name="${product.name}"
                             data-price="${product.price}"
                             data-image="${product.imageUrl}">

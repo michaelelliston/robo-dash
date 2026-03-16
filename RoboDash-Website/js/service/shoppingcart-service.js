@@ -16,13 +16,13 @@ class ShoppingCartService {
 
     addToCart(product) {
 
-        const existing = this.cart.find(item => item.productId === product.id);
+        const existing = this.cart.find(item => item.productId === product.productId);
 
         if (existing) {
             existing.quantity++;
         } else {
             this.cart.push({
-                productId: product.id,
+                productId: product.productId,
                 name: product.name,
                 price: product.price,
                 imageUrl: product.imageUrl,
@@ -57,11 +57,11 @@ class ShoppingCartService {
 
         if (!cartControl) return;
 
-        cartControl.innerText = this.cart.length;
+        const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartControl.innerText = totalItems;
     }
 
     loadCartPage() {
-
         const main = document.getElementById("main");
         if (!main) return;
 
@@ -73,13 +73,12 @@ class ShoppingCartService {
         }
 
         this.cart.forEach(item => {
-
             const div = document.createElement("div");
-            div.classList.add("cart-item");
+            div.classList.add("cart-item", "mb-4", "p-3", "border", "rounded");
 
             div.innerHTML = `
                 <h3>${item.name}</h3>
-                <img src="/images/products/${item.imageUrl}" width="120">
+                <img src="../Images/${item.imageUrl}" width="120">
                 <p>Price: $${item.price}</p>
                 <p>Quantity: ${item.quantity}</p>
                 <button class="btn btn-danger">Remove</button>
@@ -89,6 +88,43 @@ class ShoppingCartService {
                 .addEventListener("click", () => this.removeFromCart(item.productId));
 
             main.appendChild(div);
+        });
+
+        const checkoutSection = document.createElement("div");
+        checkoutSection.classList.add("mt-4", "p-3", "border", "rounded");
+
+        checkoutSection.innerHTML = `
+            <h3>Checkout</h3>
+            <div class="mb-3">
+                <label for="deliveryLocationId" class="form-label">Delivery Location ID</label>
+                <label for="locationSelect">Delivery Location</label>
+                <select id="locationSelect" class="form-select">
+                    <option value="" selected disabled>Select a delivery location...</option>
+                </select>
+            </div>
+            <button id="checkoutBtn" class="btn btn-dark">Checkout</button>
+        `;
+
+        main.appendChild(checkoutSection);
+
+        document.getElementById("checkoutBtn")
+        .addEventListener("click", () => {
+
+            const select = document.getElementById("locationSelect");
+
+            console.log("Selected location value:", select.value);
+
+            const locationId = document.getElementById("locationSelect").value;
+
+            console.log("Converted locationId:", locationId);
+
+            if (locationId === "") {
+                alert("Please select a delivery location.");
+                return;
+            }
+
+            cartService.checkout(Number(locationId));
+
         });
     }
 
@@ -112,11 +148,14 @@ class ShoppingCartService {
         axios.post(url, order)
             .then(response => {
 
-                console.log("Order created:", response.data);
+            console.log("Order created:", response.data);
+
+                const orderId = response.data.orderId;
 
                 this.clearCart();
 
-                alert("Order placed successfully!");
+                window.location.href =
+                    `../pages/delivery.html?orderId=${orderId}`;
 
             })
             .catch(error => {
