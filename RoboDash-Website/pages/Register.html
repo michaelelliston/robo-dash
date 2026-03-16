@@ -57,27 +57,27 @@
 
             <div class="card shadow-sm p-4">
 
-                <form>
+                <form onsubmit="registerUser(event)">
 
                     <!-- EMAIL -->
 
                     <div class="mb-3">
-                        <label class="form-label">Email Address</label>
-                        <input type="email" class="form-control" required>
+                        <label class="form-label">Username</label>
+                        <input type="text" id="username" class="form-control" required>
                     </div>
 
                     <!-- PASSWORD -->
 
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" class="form-control" required>
+                        <input type="password" id="password" class="form-control" required>
                     </div>
 
                     <!-- CONFIRM PASSWORD -->
 
                     <div class="mb-3">
                         <label class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" required>
+                        <input type="password" id="confirmPassword" class="form-control" required>
                     </div>
 
                     <!-- BUTTON -->
@@ -102,6 +102,34 @@
     </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="../js/config.js"></script>
+
+<script src="../js/service/user-service.js"></script>
+
+<script>
+    function registerUser(event) {
+
+        event.preventDefault();
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const confirm = document.getElementById("confirmPassword").value;
+
+        if(password !== confirm){
+            alert("Passwords do not match.");
+            return;
+        }
+
+        userService.register(username, password, confirm);
+
+        alert("Account created! Please sign in.");
+
+        window.location.href = "signin.html";
+    }
+</script>
 
 </body>
 </html>

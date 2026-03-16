@@ -94,7 +94,10 @@ class UserService {
 
         axios.post(url, register)
              .then(response => {
-                 console.log(response.data)
+
+                 alert("Registration successful!");
+                 window.location.href = "signin.html";
+
              })
             .catch(error => {
 
