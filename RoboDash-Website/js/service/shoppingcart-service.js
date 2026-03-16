@@ -155,7 +155,7 @@ class ShoppingCartService {
                 this.clearCart();
 
                 window.location.href =
-                    `../pages/robot-route.html?orderId=${orderId}`;
+                    `../pages/delivery.html?orderId=${orderId}`;
 
             })
             .catch(error => {
