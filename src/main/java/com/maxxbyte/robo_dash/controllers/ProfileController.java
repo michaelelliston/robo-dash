@@ -9,8 +9,10 @@ import com.maxxbyte.robo_dash.models.dto.ProfileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/profile")
@@ -27,23 +29,33 @@ public class ProfileController {
     }
 
     private User getCurrentUser() {
-        String username = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getName();
 
-        return userDao.getByUserName(username);
+        Authentication auth = SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+
+        if (auth == null || auth.getName().equals("anonymousUser")) {
+            return null;
+        }
+
+        return userDao.getByUserName(auth.getName());
     }
 
     @GetMapping
     public ProfileDto getProfile()
     {
         User user = getCurrentUser();
+
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not logged in");
+        }
+
         Profile profile = profileDao.getById(user.getId());
 
         if (profile == null) {
             return new ProfileDto();
         }
+
         ProfileDto profileDto = new ProfileDto();
         profileDto.setFirstName(profile.getFirstName());
         profileDto.setLastName(profile.getLastName());
