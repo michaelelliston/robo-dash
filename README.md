@@ -166,11 +166,11 @@ Open the backend project folder in IntelliJ IDEA.
 
 Create a MySQL database called:
 
-    robodash
+    robotdb
 
 Update the `application.properties` file:
 
-    spring.datasource.url=jdbc:mysql://localhost:3306/robodash
+    spring.datasource.url=jdbc:mysql://localhost:3306/robotdb
     spring.datasource.username=your_username
     spring.datasource.password=your_password
 
