@@ -125,7 +125,7 @@ class UserService {
                 axios.defaults.headers.common = {'Authorization': `Bearer ${this.currentUser.token}`
                 };
 
-                window.location.href = "../order.html";
+                window.location.href = "../pages/order.html";
             })
             .catch(error => {
 
