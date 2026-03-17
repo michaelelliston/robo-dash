@@ -77,20 +77,6 @@ public class OrderController {
             total += product.getPrice() * itemDto.getQuantity();
         }
 
-        int serviceFee;
-
-        if (total >= 10) {
-            serviceFee = 2;
-        } else {
-            serviceFee = 4;
-        }
-
-        double taxAmount = total * 0.06;
-
-        total += taxAmount;
-
-        total += serviceFee;
-
         order.setTotalPrice(total);
 
         Order createdOrder = orderDao.create(order);

@@ -263,11 +263,9 @@ public class OrderDao extends DaoBase{
             OrderItem item = new OrderItem();
 
             int productId = rows.getInt("product_id");
-            double price = rows.getDouble("price");
 
             item.setProductId(productId);
             item.setQuantity(rows.getInt("quantity"));
-            item.setPrice(price);
 
             Product product = new Product();
 

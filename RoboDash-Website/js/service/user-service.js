@@ -122,10 +122,7 @@ class UserService {
                 this.saveUser(response.data)
                 this.setHeaderLogin();
 
-                axios.defaults.headers.common = {'Authorization': `Bearer ${this.currentUser.token}`
-                };
-
-                window.location.href = "../pages/order.html";
+                axios.defaults.headers.common = {'Authorization': `Bearer ${this.currentUser.token}`}
             })
             .catch(error => {
 
