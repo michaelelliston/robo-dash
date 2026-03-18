@@ -9,8 +9,8 @@ const PATH_TYPE_MAX_SPEED_MPS = {
 //const geo = await fetch("../data/ur-walk-network.geojson").then(r => r.json());
 const statusEl = document.getElementById("status");
 const etaEl = document.getElementById("eta");
-const startBtn = document.getElementById("startBtn");
 
+const backHomeBtn = document.getElementById("backHomeBtn");
 // Basic Leaflet setup (center will be corrected after we load route)
 const map = L.map("map").setView([0, 0], 15);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -20,6 +20,12 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 let routeLine = null;
 let robotMarker = null;
+
+if (backHomeBtn) {
+    backHomeBtn.addEventListener("click", () => {
+        window.location.href = "../index.html";
+    });
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -72,8 +78,8 @@ async function startDeliveryAnimation(orderId) {
                 },
                 body: "COMPLETED"
             });
-        });
 
+        });
     } catch (err) {
         console.error(err);
         statusEl.textContent = "Error loading route";
