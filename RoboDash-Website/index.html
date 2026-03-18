@@ -64,56 +64,7 @@
     </div>
     <!-- ===== Today's Specials Section ===== -->
     <section class="py-5" style="background-color: #F4F7FA;">
-        <div class="container">
-
-            <div class="text-center mb-5">
-                <h2 class="fw-bold"> Today's Specials</h2>
-                <p class="text-muted">Hot picks. Zero wait.</p>
-            </div>
-
-            <div class="row g-4">
-
-                <!-- Special Item 1 -->
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <img src="assets/speci.jpg" class="card-img-top" alt="Special Item">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Chicken Teriyaki Bowl</h5>
-                            <p class="card-text text-muted">Grilled chicken, rice & teriyaki glaze.</p>
-                            <h6 class="fw-bold text-primary">$8.99</h6>
-                            <button class="btn btn-primary w-100 mt-2">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Special Item 2 -->
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <img src="assets/special2.jpg" class="card-img-top" alt="Special Item">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Vegan Power Wrap</h5>
-                            <p class="card-text text-muted">Fresh veggies & house sauce.</p>
-                            <h6 class="fw-bold text-primary">$7.49</h6>
-                            <button class="btn btn-primary w-100 mt-2">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Special Item 3 -->
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <img src="assets/special3.jpg" class="card-img-top" alt="Special Item">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Loaded Nachos</h5>
-                            <p class="card-text text-muted">Cheese, jalapeños & salsa.</p>
-                            <h6 class="fw-bold text-primary">$6.99</h6>
-                            <button class="btn btn-primary w-100 mt-2">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        <div id="specials-container" class="row g-4"></div>
     </section>
 </header>
 <!-- Section-->
@@ -142,7 +93,97 @@
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- Core theme JS-->
+<script src="/RoboDash-Website/js/service/user-service.js"></script>
+<script src="/RoboDash-Website/js/service/shoppingcart-service.js"></script>
+<script src="/RoboDash-Website/js/service/product-service.js"></script>
 <script src="js/scripts.js"></script>
+<script src="js/config.js"></script>
+<script>
+    document.addEventListener("click", function(e) {
+
+if (!e.target.classList.contains("add-to-cart")) return;
+
+const btn = e.target;
+
+const product = {
+productId: Number(btn.dataset.id),   // THIS IS THE KEY
+name: btn.dataset.name,
+price: Number(btn.dataset.price),
+imageUrl: btn.dataset.image
+};
+
+console.log("Product being added:", product);
+
+cartService.addToCart(product);
+
+});
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const url = `${config.baseUrl}/products`;
+
+        axios.get(url)
+            .then(response => {
+
+                let products = response.data;
+
+                // 🎲 Shuffle products randomly
+                products.sort(() => 0.5 - Math.random());
+
+                // 🧠 Take first 3
+                const selected = products.slice(0, 3);
+
+                const container = document.getElementById("specials-container");
+
+                container.innerHTML = "";
+
+                selected.forEach(product => {
+
+                    const col = document.createElement("div");
+                    col.classList.add("col-md-4");
+
+                    col.innerHTML = `
+                        <div class="card h-100 shadow-sm">
+
+                            <img src="${product.imageUrl.startsWith('Images') ? product.imageUrl : '../' + product.imageUrl}"
+                                 class="card-img-top"
+                                 alt="">
+
+                            <div class="card-body text-center">
+
+                                <h5 class="card-title">${product.name}</h5>
+
+                                <p class="card-text text-muted">
+                                    ${product.description}
+                                </p>
+
+                                <h6 class="fw-bold text-primary">$${product.price}</h6>
+
+                                <button class="btn btn-primary w-100 mt-2 add-to-cart"
+                                        data-id="${product.productId}"
+                                        data-name="${product.name}"
+                                        data-price="${product.price}"
+                                        data-image="${product.imageUrl}">
+                                    Add to Cart
+                                </button>
+
+                            </div>
+
+                        </div>
+                    `;
+
+                    container.appendChild(col);
+                });
+
+            })
+            .catch(error => {
+                console.error("Failed to load specials", error);
+            });
+
+    });
+</script>
 </body>
 </html>
