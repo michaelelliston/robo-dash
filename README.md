@@ -1,249 +1,169 @@
-# RoboDash 🚗🍔
+# 🤖 RoboDash
 
-A web-based food ordering and autonomous delivery simulation system.
+RoboDash is a full-stack web application that simulates autonomous robot food delivery.  
+Users can register, log in, manage their profile, place food orders, and watch a robot deliver their order along a dynamically calculated route.
 
-RoboDash is a full-stack application that allows users to browse food
-items, place orders, and simulate delivery using robotic couriers across
-a mapped campus environment. The system includes a backend API, database
-integration, and an interactive frontend interface.
+This project demonstrates real-world full-stack development concepts including authentication, REST APIs, database persistence, and algorithm-driven simulation.
 
-------------------------------------------------------------------------
+---
 
-## Overview
+## 🚀 Features
 
-RoboDash simulates a robotic food delivery service operating on a
-university campus. Users can browse menu items, place orders, and track
-deliveries performed by simulated robots that follow mapped routes.
+- User registration and login (JWT authentication)
+- Secure, role-based protected endpoints
+- Profile creation and editing
+- Product browsing and cart system
+- LocalStorage-based cart persistence
+- Order placement and tracking
+- Robot delivery simulation with animated routing
+- Shortest-path routing using Dijkstra’s Algorithm
+- Order status lifecycle:
+    - `IN_PROGRESS` → `COMPLETE`
 
-This project demonstrates: - Full-stack development - REST API design -
-Database integration - Pathfinding and routing logic - Frontend
-interaction with backend services
+---
 
-------------------------------------------------------------------------
-
-## Features
-
-### User Features
-
--   User registration and login
--   Secure authentication using JWT
--   Browse food menu
--   Add items to cart
--   Checkout and place orders
--   View order history
--   Track delivery simulation
-
-### System Features
-
--   Backend REST API
--   Database persistence for orders and users
--   Robot route calculation
--   Dynamic order history retrieval
--   Shopping cart management
--   Delivery animation on the frontend
-
-------------------------------------------------------------------------
-
-## Technologies Used
-
-### Backend
-
--   Java
--   Spring Boot
--   REST API
--   JDBC
--   MySQL
+## 🛠️ Tech Stack
 
 ### Frontend
+- HTML
+- CSS / Bootstrap
+- JavaScript
+- Axios
 
--   HTML
--   CSS
--   Bootstrap
--   JavaScript
--   Axios
+### Backend
+- Java Spring Boot
+- Spring Security
+- JWT Authentication (custom filter)
 
-### Tools
+### Database
+- MySQL
 
--   IntelliJ IDEA
--   Git / GitHub
--   Maven
--   MySQL Workbench
+---
 
-------------------------------------------------------------------------
+## 🧠 Architecture Overview
 
-## Project Architecture
+Frontend (HTML/JS + Axios) → 
+Spring Boot REST API →
+MySQL Database
 
-    RoboDash
-    │
-    ├── backend
-    │   ├── controllers
-    │   ├── services
-    │   ├── dao
-    │   ├── models
-    │   └── security
-    │
-    ├── frontend
-    │   ├── pages
-    │   │   ├── order.html
-    │   │   ├── cart.html
-    │   │   ├── profile.html
-    │   │   ├── order-history.html
-    │   │   └── about-us.html
-    │   │
-    │   ├── js
-    │   │   ├── service
-    │   │   ├── auth.js
-    │   │   └── scripts.js
-    │
-    └── database
-        └── schema.sql
 
-------------------------------------------------------------------------
+### Key Concepts
 
-## Database Schema
+- Frontend communicates with backend via REST endpoints
+- JWT tokens are stored in `localStorage` and attached to requests
+- A custom `JWTFilter` validates incoming requests
+- Spring Security manages authentication and authorization
+- Orders, users, and profiles are persisted in MySQL
+- Robot routes are computed using Dijkstra’s Algorithm
 
-### Users
+---
 
-Stores registered users.
+## 🔐 Authentication Flow
 
-  Column     Description
-  ---------- --------------------
-  user_id    unique user id
-  username   login username
-  password   encrypted password
-  role       user role
+1. User registers via `/register`
+2. User logs in via `/login`
+3. Backend returns a JWT token
+4. Token is stored in `localStorage`
+5. Token is sent in the `Authorization` header
+6. Backend validates token using `JWTFilter`
+7. Authenticated user is set in `SecurityContext`
 
-### Products
+---
 
-Food menu items.
+## 🛒 Application Workflow
 
-  Column        Description
-  ------------- ------------------
-  product_id    unique product
-  item_name     food name
-  description   item description
-  price         item price
-  category_id   category
+1. Register a new account
+2. Log in
+3. Update user profile
+4. Browse products and add items to cart
+5. Cart is stored in `localStorage`
+6. Proceed to checkout and place order
+7. Order is persisted in the database
+8. Robot calculates shortest route and begins delivery
+9. Order status updates from `IN_PROGRESS` to `COMPLETE`
 
-### Orders
+---
 
-Stores user orders.
+## 🤖 Robot Delivery Simulation
 
-  Column        Description
-  ------------- --------------
-  order_id      unique order
-  user_id       customer
-  total_price   order total
-  order_date    timestamp
+- Each order triggers a delivery process
+- The system calculates the shortest path between locations using Dijkstra’s Algorithm
+- The robot visually traverses the route on the frontend
+- Delivery progress is animated in real time
+- Order status is updated upon completion
 
-### Order_Items
+---
 
-Individual items within an order.
+## ▶️ Getting Started
 
-  Column          Description
-  --------------- ------------------------
-  order_item_id   unique item id
-  order_id        order reference
-  product_id      food item
-  quantity        number ordered
-  price           price at time of order
+### Prerequisites
 
-------------------------------------------------------------------------
+- Java (JDK 11+)
+- MySQL
+- Browser (Chrome recommended)
 
-## Installation
+---
 
-### 1. Clone the repository
+### Setup
 
-``` bash
-git clone https://github.com/yourusername/robodash.git
-```
+1. Clone the repository
 
-### 2. Open in IntelliJ
+2. Create and configure your MySQL database
 
-Open the backend project folder in IntelliJ IDEA.
+3. Update database credentials in `application.properties`
 
-### 3. Configure the database
+4. Run the Spring Boot application
 
-Create a MySQL database called:
+5. Open the frontend:
+   http://localhost:63342/robo-dash/RoboDash-Website/index.html
 
-    robotdb
 
-Update the `application.properties` file:
+---
 
-    spring.datasource.url=jdbc:mysql://localhost:3306/robotdb
-    spring.datasource.username=your_username
-    spring.datasource.password=your_password
+## 🔒 Security
 
-------------------------------------------------------------------------
+- JWT-based authentication
+- Protected endpoints using `@PreAuthorize`
+- Custom `JWTFilter` validates tokens per request
+- Frontend route guards redirect unauthorized users
+- Authorization headers automatically attached via Axios
 
-## Running the Project
+---
 
-### Start the Backend
+## ⚠️ Limitations
 
-Run the Spring Boot application:
+- Cart is stored in `localStorage` (not persisted server-side)
+- Minimal frontend validation in some forms
+- `state` field limited to 2 characters (e.g., "TX")
+- Robot routing depends on predefined map data in database
 
-    RoboDashApplication.java
+---
 
-The API will start at:
+## 🧪 Example Demo Flow
 
-    http://localhost:8080
+1. Register a new user
+2. Log in (JWT stored in localStorage)
+3. Update profile information
+4. Add/remove items from cart
+5. Inspect cart in DevTools (localStorage)
+6. Place an order
+7. Watch robot delivery animation
+8. Observe order status change (`IN_PROGRESS` → `COMPLETE`)
+9. Log out and verify protected route redirect
 
-### Start the Frontend
+---
 
-Open the site using:
+## 🧠 Key Technical Highlights
 
-    frontend/pages/index.html
+- Custom JWT authentication filter integrated with Spring Security
+- Role-based authorization (`ROLE_USER`)
+- Full frontend ↔ backend integration using Axios
+- Real-time simulation tied to backend state changes
+- Algorithm-driven routing (Dijkstra’s Algorithm)
 
-------------------------------------------------------------------------
+---
 
-## API Endpoints
-
-### Authentication
-
-    POST /login
-    POST /register
-
-### Products
-
-    GET /products
-    GET /products/{id}
-
-### Orders
-
-    POST /orders
-    GET /orders/my-orders
-
-### Locations
-
-    GET /locations
-
-------------------------------------------------------------------------
-
-## Frontend Pages
-
--   **Home** -- landing page
--   **Order Page** -- browse food items
--   **Cart** -- review items and checkout
--   **Order History** -- view previous orders
--   **Profile** -- manage user details
--   **About Us** -- project information
-
-------------------------------------------------------------------------
-
-## Future Improvements
-
-Possible future enhancements:
-
--   Real-time robot tracking
--   Live delivery map with GPS routes
--   Admin dashboard for managing orders
--   Payment integration
--   Mobile responsive improvements
--   More advanced pathfinding algorithms
-
-------------------------------------------------------------------------
-
-## Contributors
+## 👨‍💻 Contributors
 
 -   Humza Qasim
 -   Michael Elliston
@@ -254,8 +174,8 @@ Possible future enhancements:
 -   Uriel Marrufo
 -   Rosa Sifuentes
 
-------------------------------------------------------------------------
+---
 
-## License
+## 📌 Notes
 
-This project is for educational purposes.
+This project was developed as part of a full-stack training program to demonstrate practical application of backend services, frontend integration, and system design principles.
