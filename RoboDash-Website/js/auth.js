@@ -8,4 +8,5 @@ function requireLogin() {
 
 }
 
+
 document.addEventListener("DOMContentLoaded", requireLogin);
