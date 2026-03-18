@@ -46,7 +46,7 @@ Frontend (HTML/JS + Axios) →
 Spring Boot REST API →
 MySQL Database
 
-
+![architecture-flowchart.png](src/main/resources/screenshots/architecture-flowchart.png)
 ### Key Concepts
 
 - Frontend communicates with backend via REST endpoints
