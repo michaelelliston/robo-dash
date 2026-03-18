@@ -108,7 +108,7 @@ MySQL Database
 
 1. Clone the repository
 
-2. Create and configure your MySQL database
+2. Create and configure your MySQL database (SQL script in resources package)
 
 3. Update database credentials in `application.properties`
 
