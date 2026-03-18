@@ -32,7 +32,7 @@ class ProductService {
             col.classList.add("col");
 
             col.setAttribute("data-menu-item", "");
-            col.dataset.diet = product.diet;
+            col.dataset.diet = product.dietType;
             col.dataset.price = product.price;
 
             col.innerHTML = `
@@ -61,7 +61,7 @@ class ProductService {
                         </span>
 
                         <span class="badge bg-white border text-muted">
-                            ${product.diet}
+                            ${product.dietType}
                         </span>
 
                     </div>
