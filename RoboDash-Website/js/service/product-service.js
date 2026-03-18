@@ -39,7 +39,7 @@ class ProductService {
             <div class="card h-100 shadow-sm">
 
                 <img class="card-img-top"
-                     src="../assets/images/${product.imageUrl}"
+                     src="../${product.imageUrl}"
                      alt="">
 
                 <div class="card-body p-3 d-flex flex-column">
