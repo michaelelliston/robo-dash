@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Robot {
 
-    //TODO: implement battery drain based on meters traveled
     private int id;
     private int batteryLevel; // Percentage of battery
     private RobotStatus status;

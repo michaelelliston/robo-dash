@@ -130,10 +130,8 @@ cartService.addToCart(product);
 
                 let products = response.data;
 
-                // 🎲 Shuffle products randomly
                 products.sort(() => 0.5 - Math.random());
 
-                // 🧠 Take first 3
                 const selected = products.slice(0, 3);
 
                 const container = document.getElementById("specials-container");

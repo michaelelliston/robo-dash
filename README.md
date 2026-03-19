@@ -68,6 +68,7 @@ MySQL Database
 6. Backend validates token using `JWTFilter`
 7. Authenticated user is set in `SecurityContext`
 
+![devtools_user.png](src/main/resources/screenshots/devtools_user.png)
 ---
 
 ## 🛒 Application Workflow
@@ -82,6 +83,7 @@ MySQL Database
 8. Robot calculates shortest route and begins delivery
 9. Order status updates from `IN_PROGRESS` to `COMPLETE`
 
+![devtools_cart.png](src/main/resources/screenshots/devtools_cart.png)
 ---
 
 ## 🤖 Robot Delivery Simulation
@@ -92,6 +94,7 @@ MySQL Database
 - Delivery progress is animated in real time
 - Order status is updated upon completion
 
+![delivery-tracker.png](src/main/resources/screenshots/delivery-tracker.png)
 ---
 
 ## ▶️ Getting Started
@@ -117,7 +120,7 @@ MySQL Database
 5. Open the frontend:
    http://localhost:63342/robo-dash/RoboDash-Website/index.html
 
-
+![sql_script.png](src/main/resources/screenshots/sql_script.png)
 ---
 
 ## 🔒 Security
@@ -139,20 +142,6 @@ MySQL Database
 
 ---
 
-## 🧪 Example Demo Flow
-
-1. Register a new user
-2. Log in (JWT stored in localStorage)
-3. Update profile information
-4. Add/remove items from cart
-5. Inspect cart in DevTools (localStorage)
-6. Place an order
-7. Watch robot delivery animation
-8. Observe order status change (`IN_PROGRESS` → `COMPLETE`)
-9. Log out and verify protected route redirect
-
----
-
 ## 🧠 Key Technical Highlights
 
 - Custom JWT authentication filter integrated with Spring Security
@@ -168,12 +157,12 @@ MySQL Database
 -   Humza Qasim
 -   Michael Elliston
 -   Shamar Mohammed
+-   Zion Blue
 -   Kigen Jones
 -   Moussa Hassan
 -   Mya Allen
 -   Uriel Marrufo
 -   Rosa Sifuentes
--   Zion Blue
 
 ---
 
