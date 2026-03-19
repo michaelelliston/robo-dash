@@ -78,7 +78,7 @@ class ShoppingCartService {
 
             div.innerHTML = `
                 <h3>${item.name}</h3>
-                <img src="../Images/${item.imageUrl}" width="120">
+                <img src="../${item.imageUrl}" width="120">
                 <p>Price: $${item.price}</p>
                 <p>Quantity: ${item.quantity}</p>
                 <button class="btn btn-danger">Remove</button>
