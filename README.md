@@ -130,7 +130,9 @@ MySQL Database
 - Custom `JWTFilter` validates tokens per request
 - Frontend route guards redirect unauthorized users
 - Authorization headers automatically attached via Axios
+- Users may only view or modify their own orders
 
+![forbidden_status.png](src/main/resources/screenshots/forbidden_status.png)
 ---
 
 ## ⚠️ Limitations
